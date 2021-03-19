@@ -1,5 +1,9 @@
 #+TITLE: Architecture
 
+In this document I will be describing the architecture that is being used in this project.
+This document is prone to changes in the case that there was a better way to solve the issue then initially expected.
+If there is any problem with this document with it being either inconsistent or it not making any sense please create an [[https://github.com/tobinstultiens/sharerecipe/issues/new?labels=documentation][issue]] describing the problem.
+
 * C4 Model
 #+begin_src plantuml :file C4-model.png :exports results
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
