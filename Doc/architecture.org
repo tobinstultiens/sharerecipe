@@ -23,5 +23,7 @@ Rel(spa, api, "Uses", "https")
 Rel_R(api, db, "Reads/Writes")
 #+end_src
 
-#+results:
+#+RESULTS:
+[[file:C4-model.png]]
+
 [[file:C4-model.png][file:C4-model.png]]
