@@ -1,7 +1,7 @@
 #+TITLE: Architecture
 
 * C4 Model
-#+begin_src plantuml :file C4-model.png
+#+begin_src plantuml :file C4-model.png :exports results
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
@@ -25,5 +25,3 @@ Rel_R(api, db, "Reads/Writes")
 
 #+RESULTS:
 [[file:C4-model.png]]
-
-[[file:C4-model.png][file:C4-model.png]]
