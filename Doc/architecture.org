@@ -24,4 +24,4 @@ Rel_R(api, db, "Reads/Writes")
 #+end_src
 
 #+results:
-[[file:C4-model.png]]
+[[file:C4-model.png][file:C4-model.png]]
