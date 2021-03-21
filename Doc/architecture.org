@@ -82,25 +82,3 @@ Lay_R(authdb, rabbitmq)
 
 #+RESULTS:
 [[file:C4-model-2.png]]
-** Level 3
-#+begin_src plantuml :file C4-model-3.png :exports results
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
-!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
-!include FONTAWESOME/users.puml
-
-LAYOUT_WITH_LEGEND()
-
-Person(user, "User", "People that need to share recipes", "users")
-Container(spa, "Front end", "Vue", "The main interface that the customer interacts with")
-Container(api, "Microservices", "C#", "Handles all business logic")
-ContainerDb(db, "Database", "Microsoft SQL", "Holds product, order and invoice information")
-
-Rel(user, spa, "Uses", "https")
-Rel(spa, api, "Uses", "https")
-Rel_R(api, db, "Reads/Writes")
-#+end_src
-
-#+RESULTS:
-[[file:C4-model-3.png]]
