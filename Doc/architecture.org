@@ -1,26 +1,27 @@
 #+TITLE: Architecture
+#+DESCRIPTION: This is an architecture document that describes the project architecture
 
 In this document I will be describing the architecture that is being used in this project.
 This document is prone to changes in the case that there was a better way to solve the issue then initially expected.
 If there is any problem with this document with it being either inconsistent or it not making any sense please create an [[https://github.com/tobinstultiens/sharerecipe/issues/new?labels=documentation][issue]] describing the problem.
 
 * C4 Model
-#+begin_src plantuml :file C4-model.png :exports results
+** Level 1
+This is the level 1 C4 model of this project.
+This describes the project in a incredibly simplified manner.
+#+begin_src plantuml :file C4-model-1.png :exports results
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
 !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
-!include DEVICONS/angular.puml
-!include DEVICONS/java.puml
-!include DEVICONS/msql_server.puml
 !include FONTAWESOME/users.puml
 
 LAYOUT_WITH_LEGEND()
 
-Person(user, "sup", "People that need sleep", "users")
-Container(spa, "SPA", "angular", "The main interface that the customer interacts with", "angular")
-Container(api, "API", "java", "Handles all business logic", "java")
-ContainerDb(db, "Database", "Microsoft SQL", "Holds product, order and invoice information", "msql_server")
+Person(user, "User", "People that need to share recipes", "users")
+Container(spa, "Front end", "Vue", "The main interface that the customer interacts with")
+Container(api, "Microservices", "C#", "Handles all business logic")
+ContainerDb(db, "Database", "Microsoft SQL", "Holds product, order and invoice information")
 
 Rel(user, spa, "Uses", "https")
 Rel(spa, api, "Uses", "https")
@@ -28,4 +29,78 @@ Rel_R(api, db, "Reads/Writes")
 #+end_src
 
 #+RESULTS:
-[[file:C4-model.png]]
+[[file:C4-model-1.png]]
+
+** Level 2
+This is the level 2 C4 model of this project.
+In this model we will be describing how this project is setup in a more in dept manner.
+We will be describing how we setup the microservices and how these will be communicating.
+#+begin_src plantuml :file C4-model-2.png :exports results
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/users.puml
+
+LAYOUT_LEFT_RIGHT()
+
+Person(user, "User", "People that need to share recipes", "users")
+Container(spa, "Front end", "Vue", "The main interface that the customer interacts with")
+System_Boundary(c1, "Microservices") {
+  Container(gateway, "Gateway", "C#", "Handles all the incoming request and distributes them")
+  Container(authapi, "Auth Service", "C#", "Handles all authorization")
+  Container(followapi, "Follower Service", "C#", "Handles all follower logic")
+  Container(modapi, "Moderator Service", "C#", "Handles all moderator logic")
+  Container(kweetapi, "Kweet Service", "C#", "Handles all kweet logic")
+  Container(profileapi, "Profile Service", "C#", "Handles all profile logic")
+  ContainerDb(authdb, " Auth Database", "Postgres", "Holds authorization information")
+  ContainerDb(followdb, "Follow Database", "Postgres", "Holds follower information")
+  ContainerDb(moddb, "Moderator Database", "Postgres", "Holds moderator information")
+  ContainerDb(kweetdb, "Kweet Database", "Postgres", "Holds kweet information")
+  ContainerDb(profiledb, "Profile Database", "Postgres", "Holds profile information")
+  ContainerQueue(rabbitmq, "Message bus", "RabbitMQ", "Message bus that handles all the messages send between the microservices")
+}
+Rel(user, spa, "Uses", "https")
+Rel(spa, gateway, "Uses", "https")
+Rel(gateway, authapi, "Uses", "https")
+Rel(gateway, followapi, "Uses", "https")
+Rel(gateway, modapi, "Uses", "https")
+Rel(gateway, kweetapi, "Uses", "https")
+Rel(gateway, profileapi, "Uses", "https")
+Rel(authapi, authdb, "Reads/Writes")
+Rel(followapi, followdb, "Reads/Writes")
+Rel(modapi, moddb, "Reads/Writes")
+Rel(kweetapi, kweetdb, "Reads/Writes")
+Rel(profileapi, profiledb, "Reads/Writes")
+Rel(authapi, rabbitmq, "Reads/Writes")
+Rel(followapi, rabbitmq, "Reads/Writes")
+Rel(modapi, rabbitmq, "Reads/Writes")
+Rel(kweetapi, rabbitmq, "Reads/Writes")
+Rel(profileapi, rabbitmq, "Reads/Writes")
+Lay_R(authdb, rabbitmq)
+#+end_src
+
+#+RESULTS:
+[[file:C4-model-2.png]]
+** Level 3
+#+begin_src plantuml :file C4-model-3.png :exports results
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/users.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "People that need to share recipes", "users")
+Container(spa, "Front end", "Vue", "The main interface that the customer interacts with")
+Container(api, "Microservices", "C#", "Handles all business logic")
+ContainerDb(db, "Database", "Microsoft SQL", "Holds product, order and invoice information")
+
+Rel(user, spa, "Uses", "https")
+Rel(spa, api, "Uses", "https")
+Rel_R(api, db, "Reads/Writes")
+#+end_src
+
+#+RESULTS:
+[[file:C4-model-3.png]]
