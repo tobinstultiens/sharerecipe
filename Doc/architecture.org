@@ -53,30 +53,40 @@ System_Boundary(c1, "Microservices") {
   Container(modapi, "Moderator Service", "C#", "Handles all moderator logic")
   Container(kweetapi, "Kweet Service", "C#", "Handles all kweet logic")
   Container(profileapi, "Profile Service", "C#", "Handles all profile logic")
+  Container(tagapi, "Tag Service", "C#", "Handles all tag logic")
+
   ContainerDb(authdb, " Auth Database", "Postgres", "Holds authorization information")
   ContainerDb(followdb, "Follow Database", "Postgres", "Holds follower information")
   ContainerDb(moddb, "Moderator Database", "Postgres", "Holds moderator information")
   ContainerDb(kweetdb, "Kweet Database", "Postgres", "Holds kweet information")
   ContainerDb(profiledb, "Profile Database", "Postgres", "Holds profile information")
+  ContainerDb(tagdb, "Tag Database", "Postgres", "Holds tag information")
+
   ContainerQueue(rabbitmq, "Message bus", "RabbitMQ", "Message bus that handles all the messages send between the microservices")
 }
 Rel(user, spa, "Uses", "https")
 Rel(spa, gateway, "Uses", "https")
+
 Rel(gateway, authapi, "Uses", "https")
 Rel(gateway, followapi, "Uses", "https")
 Rel(gateway, modapi, "Uses", "https")
 Rel(gateway, kweetapi, "Uses", "https")
 Rel(gateway, profileapi, "Uses", "https")
+Rel(gateway, tagapi, "Uses", "https")
+
 Rel(authapi, authdb, "Reads/Writes")
 Rel(followapi, followdb, "Reads/Writes")
 Rel(modapi, moddb, "Reads/Writes")
 Rel(kweetapi, kweetdb, "Reads/Writes")
 Rel(profileapi, profiledb, "Reads/Writes")
+Rel(recipeapi, tagdb, "Reads/Writes")
+
 Rel(authapi, rabbitmq, "Reads/Writes")
 Rel(followapi, rabbitmq, "Reads/Writes")
 Rel(modapi, rabbitmq, "Reads/Writes")
 Rel(kweetapi, rabbitmq, "Reads/Writes")
 Rel(profileapi, rabbitmq, "Reads/Writes")
+Rel(tagdb, rabbitmq, "Reads/Writes")
 Lay_R(authdb, rabbitmq)
 #+end_src
 
