@@ -1,4 +1,5 @@
-#+TITLE: Readme
+#+TITLE: Share Recipe
+#+DESCRIPTION: Share recipe is my kwetter clone only instead of messages you share recipes
 
-* Share Recipe
+* Introduction
 This is the recipe share application that I'll be making for my 6th semester at fontys.
