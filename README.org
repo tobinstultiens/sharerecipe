@@ -1,2 +1,2 @@
-* Introduction
+* Share Recipe
 This is the recipe share application that I'll be making for my 6th semester at fontys.
