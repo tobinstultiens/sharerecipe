@@ -79,14 +79,14 @@ Rel(followapi, followdb, "Reads/Writes")
 Rel(modapi, moddb, "Reads/Writes")
 Rel(kweetapi, kweetdb, "Reads/Writes")
 Rel(profileapi, profiledb, "Reads/Writes")
-Rel(recipeapi, tagdb, "Reads/Writes")
+Rel(tagapi, tagdb, "Reads/Writes")
 
 Rel(authapi, rabbitmq, "Reads/Writes")
 Rel(followapi, rabbitmq, "Reads/Writes")
 Rel(modapi, rabbitmq, "Reads/Writes")
 Rel(kweetapi, rabbitmq, "Reads/Writes")
 Rel(profileapi, rabbitmq, "Reads/Writes")
-Rel(tagdb, rabbitmq, "Reads/Writes")
+Rel(tagapi, rabbitmq, "Reads/Writes")
 Lay_R(authdb, rabbitmq)
 #+end_src
 
