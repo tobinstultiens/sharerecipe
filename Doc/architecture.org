@@ -67,12 +67,12 @@ System_Boundary(c1, "Microservices") {
 Rel(user, spa, "Uses", "https")
 Rel(spa, gateway, "Uses", "https")
 
-Rel(gateway, authapi, "Uses", "https")
-Rel(gateway, followapi, "Uses", "https")
-Rel(gateway, modapi, "Uses", "https")
-Rel(gateway, kweetapi, "Uses", "https")
-Rel(gateway, profileapi, "Uses", "https")
-Rel(gateway, tagapi, "Uses", "https")
+Rel(gateway, authapi, "Uses", "http")
+Rel(gateway, followapi, "Uses", "http")
+Rel(gateway, modapi, "Uses", "http")
+Rel(gateway, kweetapi, "Uses", "http")
+Rel(gateway, profileapi, "Uses", "http")
+Rel(gateway, tagapi, "Uses", "http")
 
 Rel(authapi, authdb, "Reads/Writes")
 Rel(followapi, followdb, "Reads/Writes")
