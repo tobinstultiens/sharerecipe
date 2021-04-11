@@ -92,3 +92,13 @@ Lay_R(authdb, rabbitmq)
 
 #+RESULTS:
 [[file:C4-model-2.png]]
+* Design Goals
+** Scalable architecture
+Within the architecture of my application services I will be focusing on making them as scalable as possible.
+A goal within this project is to learn how to make your services scale properly while at the same time looking into how they scale.
+Since it's possible to scale an application in an incredibly inefficient manner.
+
+** Micro service Architecture
+Within the micro service architecture the goal I have is to look into the freedom that is given within this architecture.
+The reason for this is that the only thing binding microservices with each other is a network connection.
+This means that outside of that restriction you are free to use the tools available.
