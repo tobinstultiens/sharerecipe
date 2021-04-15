@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain
+namespace ShareRecipe.Services.ProfileService.Domain
 {
     public class Class1
     {

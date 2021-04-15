@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>ShareRecipe.Services.ProfileService.Domain</RootNamespace>
+        <AssemblyName>ShareRecipe.Services.ProfileService.Domain</AssemblyName>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Domain\ShareRecipe.Services.Common.Domain.csproj" />
+    </ItemGroup>
 
 </Project>
