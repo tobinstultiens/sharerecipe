@@ -57,7 +57,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           allow: network.host
-          context: ./Src/.
+          context: Src/.
           file: ./Src/auth-dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
