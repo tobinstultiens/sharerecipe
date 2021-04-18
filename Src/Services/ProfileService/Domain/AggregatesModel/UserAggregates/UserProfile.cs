@@ -5,6 +5,7 @@ namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggrega
 {
     public class UserProfile : Entity, IAggregateRoot
     {
+        public string DisplayName { get; private set; }
         public string Description { get; private set; }
         public string Image { get; private set; }
     }

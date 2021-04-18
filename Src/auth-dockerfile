@@ -7,7 +7,7 @@ COPY Services/AuthService/Application/*.csproj ./aspnetapp/
 RUN dotnet restore "aspnetapp/Application.csproj"
 
 # copy everything else and build app
-COPY Services/. ./aspnetapp/
+COPY ./Services/. ./aspnetapp/
 WORKDIR /source/aspnetapp
 RUN dotnet publish "AuthService/Application/Application.csproj" -c release -o /app
 
