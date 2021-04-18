@@ -56,7 +56,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: .
+          context: ./Src/.
           file: ./Src/auth-dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
