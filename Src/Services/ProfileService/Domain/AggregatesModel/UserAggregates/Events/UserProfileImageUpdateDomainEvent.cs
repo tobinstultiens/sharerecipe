@@ -1,17 +1,17 @@
 using System;
-using MediatR;
 using ShareRecipe.Services.Common.Domain.Events;
 
 namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates.Events
 {
-    public sealed class UserCreatedDomainEvent : DomainEvent
+    public class UserProfileImageUpdateDomainEvent : DomainEvent
     {
         public Guid UserId { get; }
+        public string Image { get; }
 
-        public UserCreatedDomainEvent(Guid userId)
+        public UserProfileImageUpdateDomainEvent(Guid userId, string image)
         {
             UserId = userId;
-            Version = 1;
+            Image = image;
         }
     }
 }

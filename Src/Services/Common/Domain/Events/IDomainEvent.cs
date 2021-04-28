@@ -6,7 +6,7 @@ namespace ShareRecipe.Services.Common.Domain.Events
     /// <summary>
     /// Represents the <see cref="DomainEvent"/> class.
     /// </summary>
-    public abstract record DomainEvent : INotification, IEvent
+    public abstract class DomainEvent : INotification, IEvent
     {
         /// <summary>
         /// Gets and sets the domain event id.

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
+using ShareRecipe.Services.ProfileService.Infrastructure;
 
 namespace Application
 {
@@ -26,6 +29,11 @@ namespace Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(p => p.AddConsole());
+            services.AddScoped<IFactory<UserProfileContext>, UserProfileDatabaseFactory>();
+            services.AddScoped<UserProfileContext>(p => p.GetRequiredService<IFactory<UserProfileContext>>().Create());
+            services.AddScoped<IAggregateUnitOfWork>(p => p.GetRequiredService<IFactory<UserProfileContext>>().Create());
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

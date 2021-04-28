@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8419B48A-CF36-469A-BD28-2B858B3FA73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareRecipe.Services.Common.Domain", "Services\Common\Domain\ShareRecipe.Services.Common.Domain.csproj", "{D17D421B-1C52-4C90-889A-25B4CEBCD639}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\Common\Domain\Domain.csproj", "{D17D421B-1C52-4C90-889A-25B4CEBCD639}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\Common\Infrastructure\Infrastructure.csproj", "{E09D182D-51A8-4582-8677-A32FA58A4C62}"
 EndProject
