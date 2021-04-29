@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using ShareRecipe.Services.Common.Domain.Persistence;
 
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
     public interface IAggregateUnitOfWork : IUnitOfWork
     {

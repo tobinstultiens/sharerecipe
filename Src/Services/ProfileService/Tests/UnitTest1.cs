@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace Tests
+namespace ShareRecipe.Services.ProfileService.Tests
 {
     public class UnitTest1
     {

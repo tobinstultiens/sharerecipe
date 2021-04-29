@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
     public abstract class DatabaseFactory<TDbContext> : DesignTimeDbContextFactoryBase<TDbContext>, IFactory<TDbContext>
         where TDbContext : DbContext

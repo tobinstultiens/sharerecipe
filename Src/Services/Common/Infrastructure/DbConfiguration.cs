@@ -1,4 +1,4 @@
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
     public sealed class DbConfiguration
     {

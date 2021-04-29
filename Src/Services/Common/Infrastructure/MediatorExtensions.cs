@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ShareRecipe.Services.Common.Domain;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
     public static class MediatorExtensions
     {

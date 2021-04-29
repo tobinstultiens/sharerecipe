@@ -1,6 +1,6 @@
-using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 
 namespace ShareRecipe.Services.ProfileService.Infrastructure

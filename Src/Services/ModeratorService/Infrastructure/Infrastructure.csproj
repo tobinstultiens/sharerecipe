@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>ShareRecipe.Services.Common.Infrastructure</AssemblyName>
+        <RootNamespace>ShareRecipe.Services.Common.Infrastructure</RootNamespace>
     </PropertyGroup>
 
 </Project>

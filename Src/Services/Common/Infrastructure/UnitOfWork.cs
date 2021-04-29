@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
      public abstract class UnitOfWork<TContext> : DbContext, IAggregateUnitOfWork where TContext : DbContext
     {

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace ShareRecipe.Services.Common.Infrastructure
 {
     /// <summary>
     /// Represents the <see cref="IFactory{TResult}"/> interface for the Factory pattern.

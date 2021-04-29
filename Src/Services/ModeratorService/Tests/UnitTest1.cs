@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace Tests
+namespace ShareRecipe.Services.Common.Tests
 {
     public class UnitTest1
     {

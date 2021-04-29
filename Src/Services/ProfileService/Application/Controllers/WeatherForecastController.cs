@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Controllers
+namespace ShareRecipe.Services.ProfileService.Application.Controllers
 {
     [ApiController]
     [Route("[controller]")]

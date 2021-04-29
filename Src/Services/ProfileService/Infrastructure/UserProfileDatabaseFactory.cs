@@ -1,8 +1,8 @@
-using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ShareRecipe.Services.Common.Infrastructure;
 
 namespace ShareRecipe.Services.ProfileService.Infrastructure
 {

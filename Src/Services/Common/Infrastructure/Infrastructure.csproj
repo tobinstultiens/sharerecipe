@@ -2,11 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>ShareRecipe.Services.Common.Infrastructure</AssemblyName>
+        <RootNamespace>ShareRecipe.Services.Common.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="MediatR" Version="9.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.5" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.5.1" />
     </ItemGroup>
 
     <ItemGroup>

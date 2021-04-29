@@ -1,6 +1,6 @@
 using System;
 
-namespace Application
+namespace ShareRecipe.Services.ProfileService.Application
 {
     public class WeatherForecast
     {

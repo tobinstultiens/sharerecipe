@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 using ShareRecipe.Services.ProfileService.Infrastructure;
 
-namespace Application
+namespace ShareRecipe.Services.ProfileService.Application
 {
     public class Startup
     {
@@ -25,14 +19,27 @@ namespace Application
         }
 
         public IConfiguration Configuration { get; }
+        
+        public static IServiceCollection AddConfigurations(this IServiceCollection serviceCollection, IConfiguration configuration)
+        {
+            serviceCollection.AddOptions();
+            serviceCollection.Configure<DbConfiguration>(configuration.GetSection("Database").Bind);
+            serviceCollection.Configure<AuthorizationConfiguration>(configuration.GetSection("Authorization").Bind);
+            serviceCollection.Configure<MessagingConfiguration>(configuration.GetSection("Messaging").Bind);
+            serviceCollection.Configure<EventStoreConfiguration>(configuration.GetSection("EventStore").Bind);
+            serviceCollection.Configure<ServiceConfiguration>(configuration.GetSection("Service").Bind);
+            return serviceCollection;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConfigurations(Configuration);
             services.AddLogging(p => p.AddConsole());
             services.AddScoped<IFactory<UserProfileContext>, UserProfileDatabaseFactory>();
             services.AddScoped<UserProfileContext>(p => p.GetRequiredService<IFactory<UserProfileContext>>().Create());
-            services.AddScoped<IAggregateUnitOfWork>(p => p.GetRequiredService<IFactory<UserProfileContext>>().Create());
+            services.AddScoped<IAggregateUnitOfWork>(p =>
+                p.GetRequiredService<IFactory<UserProfileContext>>().Create());
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
