@@ -2,7 +2,7 @@ using System;
 using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
 
-namespace ShareRecipe.Services.ProfileService.Application.Application.Commands
+namespace ShareRecipe.Services.ProfileService.API.Application.Commands
 {
     public class CreateUserProfileCommand : IRequest<CommandResponse>
     {

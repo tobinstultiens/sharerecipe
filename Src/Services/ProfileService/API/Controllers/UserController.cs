@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShareRecipe.Services.ProfileService.Application.Application.Commands;
+using ShareRecipe.Services.ProfileService.API.Application.Commands;
 
-namespace ShareRecipe.Services.ProfileService.Application.Controllers
+namespace ShareRecipe.Services.ProfileService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

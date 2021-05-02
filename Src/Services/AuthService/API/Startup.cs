@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace ShareRecipe.Services.Common.Application
+namespace ShareRecipe.Services.Common.API
 {
     public class Startup
     {

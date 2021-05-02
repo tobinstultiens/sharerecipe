@@ -2,12 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using MediatR;
-using ShareRecipe.Services.Common.API.CQRS;
-using ShareRecipe.Services.ProfileService.Application.Application.Commands;
+using ShareRecipe.Services.ProfileService.API.Application.Commands;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 
-namespace ShareRecipe.Services.ProfileService.Application.Application.Validations
+namespace ShareRecipe.Services.ProfileService.API.Application.Validations
 {
     public class CreateUserProfileCommandValidator : AbstractValidator<CreateUserProfileCommand>
     {

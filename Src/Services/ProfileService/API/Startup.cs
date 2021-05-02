@@ -1,24 +1,18 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ShareRecipe.Services.Common.API;
-using ShareRecipe.Services.Common.Domain;
-using ShareRecipe.Services.Common.Domain.Events;
 using ShareRecipe.Services.Common.Infrastructure;
-using ShareRecipe.Services.ProfileService.Application.Application.Commands;
+using ShareRecipe.Services.ProfileService.API.Application.Commands;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 using ShareRecipe.Services.ProfileService.Infrastructure;
 
-namespace ShareRecipe.Services.ProfileService.Application
+namespace ShareRecipe.Services.ProfileService.API
 {
     public class Startup
     {

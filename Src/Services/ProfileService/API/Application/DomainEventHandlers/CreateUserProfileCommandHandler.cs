@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
-using ShareRecipe.Services.ProfileService.Application.Application.Commands;
+using ShareRecipe.Services.ProfileService.API.Application.Commands;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 
-namespace ShareRecipe.Services.ProfileService.Application.Application.DomainEventHandlers
+namespace ShareRecipe.Services.ProfileService.API.Application.DomainEventHandlers
 {
     public sealed class CreateUserProfileCommandHandler : IRequestHandler<CreateUserProfileCommand, CommandResponse>
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace ShareRecipe.Services.Common.Application
+namespace ShareRecipe.Services.Common.API
 {
     public class WeatherForecast
     {

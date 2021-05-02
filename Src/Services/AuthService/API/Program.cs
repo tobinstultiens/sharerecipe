@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace ShareRecipe.Services.Common.Application
+namespace ShareRecipe.Services.Common.API
 {
     public class Program
     {
