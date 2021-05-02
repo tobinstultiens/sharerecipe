@@ -25,7 +25,7 @@ namespace ShareRecipe.Services.Common.Application
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Application", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "AuthService.API", Version = "v1"});
             });
             services.AddIdentityServer()
                 .AddInMemoryClients(new List<Client>())
@@ -43,7 +43,7 @@ namespace ShareRecipe.Services.Common.Application
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Application v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthService.API v1"));
             }
 
             app.UseHttpsRedirection();

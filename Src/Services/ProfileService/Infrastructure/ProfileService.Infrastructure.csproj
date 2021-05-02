@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Common\Domain\Domain.csproj" />
-      <ProjectReference Include="..\..\Common\Infrastructure\Infrastructure.csproj" />
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Common\Domain\Common.Domain.csproj" />
+      <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+      <ProjectReference Include="..\Domain\ProfileService.Domain.csproj" />
     </ItemGroup>
 
 </Project>

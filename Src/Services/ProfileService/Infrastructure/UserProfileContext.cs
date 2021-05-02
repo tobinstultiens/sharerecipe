@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 
@@ -13,8 +14,9 @@ namespace ShareRecipe.Services.ProfileService.Infrastructure
         {
         }
 
-        public UserProfileContext(DbContextOptions<UserProfileContext> options, IMediator mediator) : base(options,
-            mediator)
+        public UserProfileContext(DbContextOptions<UserProfileContext> options, IMediator mediator,
+            ILogger<UserProfileContext> createLogger) : base(options,
+            mediator, createLogger)
         {
         }
         

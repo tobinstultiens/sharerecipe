@@ -12,6 +12,8 @@ namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggrega
         public string Description { get; private set; }
         public string Image { get; private set; }
 
+        protected UserProfile() { }
+
         public UserProfile(Guid id, string description, string image)
         {
             AddDomainEvent(new UserProfileCreatedDomainEvent(id));
@@ -31,7 +33,7 @@ namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggrega
         {
             if (string.IsNullOrWhiteSpace(image))
                 throw new ArgumentException("The image is null, empty or contains a whitespace.");
-            if (IsImageUrl(image))
+            if (!IsImageUrl(image))
                 throw new ArgumentException("The image url does not contain an image.");
             Image = image;
             AddDomainEvent(new UserProfileImageUpdateDomainEvent(id, image));

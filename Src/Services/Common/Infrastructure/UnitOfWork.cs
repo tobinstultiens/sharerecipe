@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 
 namespace ShareRecipe.Services.Common.Infrastructure
 {
@@ -31,7 +32,8 @@ namespace ShareRecipe.Services.Common.Infrastructure
         /// </summary>
         /// <param name="options">The database context options.</param>
         /// <param name="mediator">The mediator.</param>
-        protected UnitOfWork(DbContextOptions<TContext> options, IMediator mediator) : base(options)
+        /// <param name="createLogger"></param>
+        protected UnitOfWork(DbContextOptions<TContext> options, IMediator mediator, ILogger<UnitOfWork<TContext>> createLogger) : base(options)
         {
             _mediator = mediator;
         }

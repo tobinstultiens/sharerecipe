@@ -10,43 +10,45 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModeratorService", "Moderat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileService", "ProfileService", "{7687C0CF-EC9A-4A50-80FE-79AC01A77010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\AuthService\Application\Application.csproj", "{97B2FE91-25D4-4BD3-8128-F463844AC52A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.API", "Services\AuthService\API\AuthService.API.csproj", "{97B2FE91-25D4-4BD3-8128-F463844AC52A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\FollowerService\Application\Application.csproj", "{56390D5F-6612-4A42-86A4-57D5B7D4FD3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowerService.API", "Services\FollowerService\API\FollowerService.API.csproj", "{56390D5F-6612-4A42-86A4-57D5B7D4FD3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\ModeratorService\Application\Application.csproj", "{25F4A0DD-3117-46DC-8FFA-5E411C884E95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeratorService.API", "Services\ModeratorService\API\ModeratorService.API.csproj", "{25F4A0DD-3117-46DC-8FFA-5E411C884E95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\ProfileService\Application\Application.csproj", "{B7923DE6-14F5-4955-BFA3-1BA88344BC93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileService.API", "Services\ProfileService\API\ProfileService.API.csproj", "{B7923DE6-14F5-4955-BFA3-1BA88344BC93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\AuthService\Domain\Domain.csproj", "{B0948806-2B41-48A0-B3A6-8FBAA35440E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Domain", "Services\AuthService\Domain\AuthService.Domain.csproj", "{B0948806-2B41-48A0-B3A6-8FBAA35440E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\AuthService\Infrastructure\Infrastructure.csproj", "{367FA06C-2050-4D79-A575-4A68D98DA9DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Infrastructure", "Services\AuthService\Infrastructure\AuthService.Infrastructure.csproj", "{367FA06C-2050-4D79-A575-4A68D98DA9DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Services\AuthService\Tests\Tests.csproj", "{59365109-17A9-4F30-8DE5-967578E9ED49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Tests", "Services\AuthService\Tests\AuthService.Tests.csproj", "{59365109-17A9-4F30-8DE5-967578E9ED49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Services\FollowerService\Tests\Tests.csproj", "{E2BE6AD9-F4D7-4ACD-B13E-BC61C48FD854}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowerService.Tests", "Services\FollowerService\Tests\FollowerService.Tests.csproj", "{E2BE6AD9-F4D7-4ACD-B13E-BC61C48FD854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Services\ModeratorService\Tests\Tests.csproj", "{7FDBEDD3-52A3-4F92-8D6A-BA0A8027F588}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeratorService.Tests", "Services\ModeratorService\Tests\ModeratorService.Tests.csproj", "{7FDBEDD3-52A3-4F92-8D6A-BA0A8027F588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Services\ProfileService\Tests\Tests.csproj", "{BA31123B-AA7E-43C4-9975-A89F24C3F589}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileService.Tests", "Services\ProfileService\Tests\ProfileService.Tests.csproj", "{BA31123B-AA7E-43C4-9975-A89F24C3F589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\FollowerService\Domain\Domain.csproj", "{BA2228EB-2EFA-4AAB-9FF0-5DED1D6F1D5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowerService.Domain", "Services\FollowerService\Domain\FollowerService.Domain.csproj", "{BA2228EB-2EFA-4AAB-9FF0-5DED1D6F1D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\ModeratorService\Domain\Domain.csproj", "{20975373-2ABC-4D5F-868F-6B667EDE2E35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeratorService.Domain", "Services\ModeratorService\Domain\ModeratorService.Domain.csproj", "{20975373-2ABC-4D5F-868F-6B667EDE2E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\ProfileService\Domain\Domain.csproj", "{6F1E81CF-D76A-4EC9-B96F-07D2A625E38A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileService.Domain", "Services\ProfileService\Domain\ProfileService.Domain.csproj", "{6F1E81CF-D76A-4EC9-B96F-07D2A625E38A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\FollowerService\Infrastructure\Infrastructure.csproj", "{0AE58801-0374-4AB3-A416-F7463F76B170}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowerService.Infrastructure", "Services\FollowerService\Infrastructure\FollowerService.Infrastructure.csproj", "{0AE58801-0374-4AB3-A416-F7463F76B170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\ModeratorService\Infrastructure\Infrastructure.csproj", "{75D378CF-363C-49A8-9D2E-0855740F11AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeratorService.Infrastructure", "Services\ModeratorService\Infrastructure\ModeratorService.Infrastructure.csproj", "{75D378CF-363C-49A8-9D2E-0855740F11AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\ProfileService\Infrastructure\Infrastructure.csproj", "{9E75CFD0-8A1C-464B-A4B2-55702B97ECD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileService.Infrastructure", "Services\ProfileService\Infrastructure\ProfileService.Infrastructure.csproj", "{9E75CFD0-8A1C-464B-A4B2-55702B97ECD8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8419B48A-CF36-469A-BD28-2B858B3FA73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\Common\Domain\Domain.csproj", "{D17D421B-1C52-4C90-889A-25B4CEBCD639}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain", "Services\Common\Domain\Common.Domain.csproj", "{D17D421B-1C52-4C90-889A-25B4CEBCD639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\Common\Infrastructure\Infrastructure.csproj", "{E09D182D-51A8-4582-8677-A32FA58A4C62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Infrastructure", "Services\Common\Infrastructure\Common.Infrastructure.csproj", "{E09D182D-51A8-4582-8677-A32FA58A4C62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.API", "Services\Common\API\Common.API.csproj", "{28C3B065-0676-475B-91DB-23E96A079320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,7 @@ Global
 		{8419B48A-CF36-469A-BD28-2B858B3FA73F} = {6E6E2DE8-8DB0-45F6-B4D7-83CF069713F5}
 		{D17D421B-1C52-4C90-889A-25B4CEBCD639} = {8419B48A-CF36-469A-BD28-2B858B3FA73F}
 		{E09D182D-51A8-4582-8677-A32FA58A4C62} = {8419B48A-CF36-469A-BD28-2B858B3FA73F}
+		{28C3B065-0676-475B-91DB-23E96A079320} = {8419B48A-CF36-469A-BD28-2B858B3FA73F}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{97B2FE91-25D4-4BD3-8128-F463844AC52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -151,5 +154,9 @@ Global
 		{E09D182D-51A8-4582-8677-A32FA58A4C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E09D182D-51A8-4582-8677-A32FA58A4C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E09D182D-51A8-4582-8677-A32FA58A4C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C3B065-0676-475B-91DB-23E96A079320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C3B065-0676-475B-91DB-23E96A079320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C3B065-0676-475B-91DB-23E96A079320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C3B065-0676-475B-91DB-23E96A079320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
