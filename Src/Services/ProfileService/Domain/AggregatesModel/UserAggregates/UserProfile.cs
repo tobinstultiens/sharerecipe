@@ -7,7 +7,7 @@ using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates.
 
 namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates
 {
-    public class UserProfile : Entity, IAggregateRoot
+    public class UserProfile : Entity
     {
         public string Description { get; private set; }
         public string Image { get; private set; }

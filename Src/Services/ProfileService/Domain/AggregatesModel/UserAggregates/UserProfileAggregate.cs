@@ -28,12 +28,5 @@ namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggrega
             DisplayName = displayName ?? throw new ArgumentNullException(nameof(displayName));
             AddDomainEvent(new UserDisplayNameUpdatedDomainEvent(Id, displayName));
         }
-
-        private void SetId(Guid userId)
-        {
-            if (userId == Guid.Empty)
-                throw new ArgumentException("The user id is empty.");
-            Id = userId;
-        }
     }
 }

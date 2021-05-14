@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>ShareRecipe.Services.KweetService.Domain</AssemblyName>
+        <RootNamespace>ShareRecipe.Services.KweetService.Domain</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Domain\Common.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="UnitsNet" Version="4.90.0" />
+    </ItemGroup>
+
+</Project>

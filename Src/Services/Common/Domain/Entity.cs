@@ -92,5 +92,12 @@ namespace ShareRecipe.Services.Common.Domain
         {
             return !(left == right);
         }
+
+        protected void SetId(Guid id)
+        {
+            if (id == Guid.Empty)
+                throw new ArgumentException("The id is empty.");
+            Id = id;
+        }
     }
 }

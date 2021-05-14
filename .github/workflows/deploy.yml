@@ -15,7 +15,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/auth-${GITHUB_REPOSITORY#*/}
+          DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/kweet-${GITHUB_REPOSITORY#*/}
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
@@ -58,7 +58,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           allow: network.host
           context: Src/
-          file: ./Src/auth-dockerfile
+          file: ./Src/kweet-dockerfile
           platforms: linux/arm/v7,linux/amd64
           push: true
           tags: ${{ steps.prep.outputs.tags }}
