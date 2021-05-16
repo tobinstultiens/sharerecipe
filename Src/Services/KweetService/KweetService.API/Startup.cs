@@ -1,17 +1,45 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using ShareRecipe.Services.Common.API;
+using ShareRecipe.Services.Common.Infrastructure;
+using ShareRecipe.Services.KweetService.API.Application.Commands;
+using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
+using ShareRecipe.Services.KweetService.Infrastructure;
 
 namespace ShareRecipe.Services.KweetService.API
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConfigurations(Configuration);
+            services.AddLogging(p => p.AddConsole());
+            services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
+                Assembly.GetAssembly(typeof(CreateKweetCommand)));
+            services.AddScoped<IFactory<KweetContext>, KweetDatabaseFactory>();
+            services.AddScoped<KweetContext>(p => p.GetRequiredService<IFactory<KweetContext>>().Create());
+            services.AddScoped<IAggregateUnitOfWork>(p =>
+                p.GetRequiredService<IFactory<KweetContext>>().Create());
+            services.AddScoped<IKweetRepository, KweetRepository>();
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "KweetService.API", Version = "v1"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -22,12 +50,11 @@ namespace ShareRecipe.Services.KweetService.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KweetService.API v1"));
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -6,4 +6,22 @@
         <RootNamespace>ShareRecipe.Services.KweetService.API</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\API\Common.API.csproj" />
+      <ProjectReference Include="..\KweetService.Domain\KweetService.Domain.csproj" />
+      <ProjectReference Include="..\KweetService.Infrastructure\KweetService.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Behaviors" />
+      <Folder Include="Application\IntegrationEvents" />
+      <Folder Include="Application\Models" />
+      <Folder Include="Application\Queries" />
+    </ItemGroup>
+
 </Project>

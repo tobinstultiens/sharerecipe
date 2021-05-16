@@ -7,6 +7,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 {
     public class KweetAggregate : Entity, IAggregateRoot
     {
+        public Guid userId { get; private set; }
         public string Message { get; private set; }
         public List<Ingredient> Ingredients { get; private set; }
         public List<string> Directions { get; private set; }
@@ -15,12 +16,20 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
         {
         }
 
-        public KweetAggregate(Guid kweetId, string message, List<Ingredient> ingredients, List<string> directions)
+        public KweetAggregate(Guid userId, string message, List<Ingredient> ingredients, List<string> directions)
         {
-            SetId(kweetId);
-            AddDomainEvent(new KweetCreatedDomainEvent(kweetId));
-            SetMessage(kweetId, message);
-            SetDirections(kweetId, directions);
+            SetId(Guid.NewGuid());
+            SetUserId(userId);
+            AddDomainEvent(new KweetCreatedDomainEvent(userId));
+            SetMessage(userId, message);
+            SetDirections(userId, directions);
+        }
+
+        private void SetUserId(Guid guid)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException("The user id is empty.");
+            Id = guid;
         }
 
         private void SetDirections(Guid kweetId, List<string> directions)
