@@ -27,9 +27,9 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         private void SetUserId(Guid guid)
         {
-            if (userId == Guid.Empty)
+            if (guid == Guid.Empty)
                 throw new ArgumentException("The user id is empty.");
-            Id = guid;
+            userId = guid;
         }
 
         private void SetDirections(Guid kweetId, List<string> directions)

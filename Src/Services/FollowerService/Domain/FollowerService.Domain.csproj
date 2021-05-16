@@ -6,4 +6,8 @@
         <RootNamespace>ShareRecipe.Services.Common.Domain</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Domain\Common.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

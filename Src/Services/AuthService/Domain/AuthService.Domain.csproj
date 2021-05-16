@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>ShareRecipe.Services.Common.Domain</AssemblyName>
-        <RootNamespace>ShareRecipe.Services.Common.Domain</RootNamespace>
-    </PropertyGroup>
-
-</Project>
