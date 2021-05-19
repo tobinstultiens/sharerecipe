@@ -1,7 +1,6 @@
 using System;
 using ShareRecipe.Services.Common.Domain;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates.Events;
-using UnitsNet;
 
 namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates
 {

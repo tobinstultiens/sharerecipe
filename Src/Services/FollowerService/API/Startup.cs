@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace ShareRecipe.Services.Common.API
+namespace ShareRecipe.Services.Follower.API
 {
     public class Startup
     {

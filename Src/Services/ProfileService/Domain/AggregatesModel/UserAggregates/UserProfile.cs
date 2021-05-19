@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Headers;
 using ShareRecipe.Services.Common.Domain;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates.Events;
 

@@ -2,12 +2,25 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>ShareRecipe.Services.Common.API</AssemblyName>
-        <RootNamespace>ShareRecipe.Services.Common.API</RootNamespace>
+        <AssemblyName>ShareRecipe.Services.Follower.API</AssemblyName>
+        <RootNamespace>ShareRecipe.Services.Follower.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Behaviors" />
+      <Folder Include="Application\IntegrationEvents" />
+      <Folder Include="Application\Models" />
+      <Folder Include="Application\Queries" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\API\Common.API.csproj" />
+      <ProjectReference Include="..\Domain\FollowerService.Domain.csproj" />
     </ItemGroup>
 
 </Project>

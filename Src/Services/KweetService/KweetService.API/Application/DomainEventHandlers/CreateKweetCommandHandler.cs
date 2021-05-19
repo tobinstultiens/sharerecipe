@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
-using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.DomainEventHandlers
 {

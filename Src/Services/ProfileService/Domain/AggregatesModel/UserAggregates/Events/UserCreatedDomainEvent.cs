@@ -1,5 +1,4 @@
 using System;
-using MediatR;
 using ShareRecipe.Services.Common.Domain.Events;
 
 namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates.Events

@@ -1,6 +1,8 @@
 ﻿using System;
+using ShareRecipe.Services.Common.Domain;
+using ShareRecipe.Services.Follower.Domain.Events;
 
-namespace ShareRecipe.Services.Common.Domain
+namespace ShareRecipe.Services.Follower.Domain
 {
     public class FollowerAggregate : Entity, IAggregateRoot
     {
@@ -17,6 +19,7 @@ namespace ShareRecipe.Services.Common.Domain
             SetFollowerId(followerId);
             SetFollowedId(followedId);
             SetFollowedAt(followedAt);
+            AddDomainEvent(new FollowerCreatedDomainEvent(followerId));
         }
 
         private void SetFollowedAt(DateTime followedAt)
