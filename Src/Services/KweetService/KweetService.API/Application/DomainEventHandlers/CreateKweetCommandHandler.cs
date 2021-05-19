@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using EasyNetQ;
 using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
@@ -14,11 +15,13 @@ namespace ShareRecipe.Services.KweetService.API.Application.DomainEventHandlers
     public sealed class CreateKweetCommandHandler : IRequestHandler<CreateKweetCommand, CommandResponse>
     {
         private readonly IKweetRepository _kweetRepository;
+        private readonly IBus _bus;
 
-        public CreateKweetCommandHandler(IKweetRepository kweetRepository)
+        public CreateKweetCommandHandler(IKweetRepository kweetRepository, IBus bus)
         {
             _kweetRepository =
                 kweetRepository ?? throw new ArgumentNullException(nameof(kweetRepository));
+            _bus = bus;
         }
 
         public async Task<CommandResponse> Handle(CreateKweetCommand request, CancellationToken cancellationToken)

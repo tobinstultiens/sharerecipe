@@ -26,6 +26,7 @@ namespace ShareRecipe.Services.KweetService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigurations(Configuration);
+            services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
                 Assembly.GetAssembly(typeof(CreateKweetCommand)));
