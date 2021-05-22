@@ -35,14 +35,6 @@ namespace ShareRecipe.Services.KweetService.API.Application.Validations
                 context.AddFailure("The user id can not be empty.");
                 return;
             }
-            // Checks whether the user id already exists.
-            // TODO Check if user id already exists.
-            //KweetAggregate kweetAggregate = await _kweetRepository.GetAsync(proposedId, cancellationToken);
-            //if (kweetAggregate != default)
-            //{
-            //    context.AddFailure("A user with the proposed user id already exists.");
-            //    return;
-            //}
         }
     }
 }

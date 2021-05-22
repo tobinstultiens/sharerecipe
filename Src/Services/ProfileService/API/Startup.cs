@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +41,20 @@ namespace ShareRecipe.Services.ProfileService.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "ProfileService.API", Version = "v1"});
             });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+
+                    options.Authority = Configuration["Authentication:KeycloakAuthentication:ServerAddress"] + "/auth/realms/" + Configuration["Authentication:KeycloakAuthentication:Realm"];
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidAudiences = new string[] { "curl", "financeApplication", "accountingApplication", "swagger"}
+                    };
+                    options.RequireHttpsMetadata = false; //for test only!
+                    options.SaveToken = true;
+                    options.Validate();
+
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +65,7 @@ namespace ShareRecipe.Services.ProfileService.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProfileService.API v1"));
             app.UseRouting();

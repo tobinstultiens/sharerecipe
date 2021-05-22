@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharerecipe-kweet-service
+  namespace: sharerecipe
+  labels:
+    app: sharerecipe-kweet-service
+    service: sharerecipe-kweet-service
+spec:
+  selector:
+    app: sharerecipe-kweet-service-pod
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharerecipe-kweet-service
+  namespace: sharerecipe
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: sharerecipe-kweet-service-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: sharerecipe-kweet-service-pod
+        version: latest
+    spec:
+      containers:
+        - name: sharerecipe-kweet-container
+          image: kick1999/kweet-sharerecipe:latest
+          imagePullPolicy: Always
+          #envFrom:
+            #- secretRef:
+                #name: sharerecipe-kweet-service-secret
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 300m
+          ports:
+            - containerPort: 80

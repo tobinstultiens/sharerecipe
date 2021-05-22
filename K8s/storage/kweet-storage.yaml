@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sharerecipe-kweet-db-volume-claim
+  namespace: sharerecipe
+spec:
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: local-storage
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sharerecipe-kweet-db-volume
+  namespace: sharerecipe
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 4Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/data/sharerecipe-kweet-db/
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: sharerecipe-kweet-db-volume-claim
+    namespace: sharerecipe
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - kmaster

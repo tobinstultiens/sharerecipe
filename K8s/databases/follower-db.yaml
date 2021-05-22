@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharerecipe-follower-db
+  namespace: sharerecipe
+  labels:
+    app: sharerecipe-follower-db
+    service: sharerecipe-follower-db
+spec:
+  selector:
+    app: sharerecipe-follower-db-pod
+  ports:
+    - protocol: TCP
+      name: tcp-psql
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharerecipe-follower-db
+  namespace: sharerecipe
+spec:
+  selector:
+    matchLabels:
+      app: sharerecipe-follower-db-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: sharerecipe-follower-db-pod
+        version: latest
+    spec:
+      containers:
+        - name: sharerecipe-follower-db-container
+          image: postgres:13.2
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            limits:
+              memory: 200Mi
+              cpu: 300m
+          ports:
+            - containerPort: 5432
+          #envFrom:
+          #  - secretRef:
+          #      name: sharerecipe-follower-db-secret
+          volumeMounts:
+            - name: sharerecipe-follower-db-volume
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: sharerecipe-follower-db-volume
+          persistentVolumeClaim:
+            claimName: sharerecipe-follower-db-volume-claim

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharerecipe-profile-service
+  namespace: sharerecipe
+  labels:
+    app: sharerecipe-profile-service
+    service: sharerecipe-profile-service
+spec:
+  selector:
+    app: sharerecipe-profile-service-pod
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharerecipe-profile-service
+  namespace: sharerecipe
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: sharerecipe-profile-service-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: sharerecipe-profile-service-pod
+        version: latest
+    spec:
+      containers:
+        - name: sharerecipe-profile-container
+          image: kick1999/profile-sharerecipe:latest
+          imagePullPolicy: Always
+          #envFrom:
+            #- secretRef:
+                #name: sharerecipe-profile-service-secret
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 300m
+          ports:
+            - containerPort: 80
