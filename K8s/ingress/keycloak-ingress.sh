@@ -1,2 +1,2 @@
 #!/bin/sh
-cat keycloak-ingress.yaml | sed "s/KEYCLOAK_HOST/keycloak.$(minikube ip).nip.io/" | kubectl create -f -
+sed "s/KEYCLOAK_HOST/keycloak.$(minikube ip).nip.io/" keycloak-ingress.yaml | kubectl create -f -
