@@ -1,4 +1,4 @@
-name: ShareRecipe
+name: ShareRecipe-Kweet
 
 on:
   push:

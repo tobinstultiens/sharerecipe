@@ -1,4 +1,4 @@
-name: ShareRecipe
+name: ShareRecipe-Profile
 
 on:
   push:
