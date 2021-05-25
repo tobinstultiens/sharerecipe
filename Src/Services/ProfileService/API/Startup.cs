@@ -28,6 +28,7 @@ namespace ShareRecipe.Services.ProfileService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigurations(Configuration);
+            services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
                 Assembly.GetAssembly(typeof(CreateUserProfileCommand)));
@@ -41,20 +42,7 @@ namespace ShareRecipe.Services.ProfileService.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "ProfileService.API", Version = "v1"});
             });
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-
-                    options.Authority = Configuration["Authentication:KeycloakAuthentication:ServerAddress"] + "/auth/realms/" + Configuration["Authentication:KeycloakAuthentication:Realm"];
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidAudiences = new string[] { "curl", "financeApplication", "accountingApplication", "swagger"}
-                    };
-                    options.RequireHttpsMetadata = false; //for test only!
-                    options.SaveToken = true;
-                    options.Validate();
-
-                });
+            services.AddKeycloak(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

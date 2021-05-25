@@ -8,11 +8,11 @@ namespace ShareRecipe.Services.ProfileService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class ProfileController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator)
+        public ProfileController(IMediator mediator)
         {
             _mediator = mediator;
         }

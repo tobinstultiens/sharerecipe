@@ -40,6 +40,7 @@ namespace ShareRecipe.Services.KweetService.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "KweetService.API", Version = "v1"});
             });
+            services.AddKeycloak(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,7 @@
 using System.Reflection;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShareRecipe.Services.Common.API.Configurations;
@@ -28,6 +29,26 @@ namespace ShareRecipe.Services.Common.API
             serviceCollection.AddOptions();
             serviceCollection.Configure<DbConfiguration>(configuration.GetSection("Database").Bind);
             serviceCollection.Configure<ServiceConfiguration>(configuration.GetSection("Service").Bind);
+            return serviceCollection;
+        }
+
+        public static IServiceCollection AddKeycloak(this IServiceCollection serviceCollection,
+            IConfiguration configuration)
+        {
+            serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+
+                    options.Authority = configuration["Authentication:KeycloakAuthentication:ServerAddress"] + "/auth/realms/" + configuration["Authentication:KeycloakAuthentication:Realm"];
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidAudiences = new string[] { "curl", "financeApplication", "accountingApplication", "swagger"}
+                    };
+                    options.RequireHttpsMetadata = false; //for test only!
+                    options.SaveToken = true;
+                    options.Validate();
+
+                });
             return serviceCollection;
         }
     }
