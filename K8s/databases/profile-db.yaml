@@ -42,9 +42,9 @@ spec:
               cpu: 300m
           ports:
             - containerPort: 5432
-          #envFrom:
-          #  - secretRef:
-          #      name: sharerecipe-profile-db-secret
+          envFrom:
+            - secretRef:
+                name: sharerecipe-profile-db-secret
           volumeMounts:
             - name: sharerecipe-profile-db-volume
               mountPath: /var/lib/postgresql/data

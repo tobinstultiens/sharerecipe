@@ -1,22 +1,32 @@
 #!/bin/sh
-minikube start
+minikube config set driver kvm2
+minikube start --cpus=8 --memory=16384
+minikube addons enable ingress
 # Create ShareRecipe
+kubectl apply -f services/keycloak.yaml
+(cd ingress/ ; sh keycloak-ingress.sh)
+kubectl apply -f sharerecipe-namespace.yaml
 kubectl config set-context sharerecipe --namespace=sharerecipe --cluster=minikube --user=minikube
 kubectl config use-context sharerecipe
-kubectl apply -f sharerecipe-namespace.yaml
+kubectl apply -f secrets
 # Install istio if not installed
 if ! command -v istioctl &> /dev/null
 then
     echo "istio could not be found"
-		paru -S istio
+		exit 0;
 fi
 # Configure Istio
 istioctl install -y
 kubectl label namespace sharerecipe istio-injection=enabled
+# Setup metallb
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f metallb
 # Setup local mounts
 minikube ssh -- sudo mkdir /mnt/data
 minikube ssh -- sudo mkdir /mnt/data/sharerecipe-profile-db
-minikube ssh -- sudo mkdir /mnt/data/sharerecipe-follow-db
+minikube ssh -- sudo mkdir /mnt/data/sharerecipe-follower-db
 minikube ssh -- sudo mkdir /mnt/data/sharerecipe-kweet-db
 minikube ssh -- sudo mkdir /mnt/data/rabbit-store
 minikube ssh -- sudo mkdir /mnt/data/rabbit-store-1
@@ -33,4 +43,3 @@ kubectl apply -f RabbitMQ
 kubectl apply -f databases
 # Setup services
 kubectl apply -f services
-

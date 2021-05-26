@@ -43,9 +43,9 @@ spec:
         - name: sharerecipe-kweet-container
           image: kick1999/kweet-sharerecipe:latest
           imagePullPolicy: Always
-          #envFrom:
-            #- secretRef:
-                #name: sharerecipe-kweet-service-secret
+          envFrom:
+            - secretRef:
+                name: sharerecipe-kweet-service-secret
           resources:
             limits:
               memory: 500Mi

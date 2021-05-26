@@ -1,0 +1,95 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: sharerecipe-gateway
+  namespace: sharerecipe
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+      #tls:
+      #  mode: SIMPLE
+      #  credentialName: ext-host-cert
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sharerecipe-gateway-virtual-service
+  namespace: sharerecipe
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - sharerecipe-gateway
+  http:
+    - name: sharerecipe-profile-service-latest-routes
+      match:
+        - uri:
+            prefix: /api/Profile
+      route:
+        - destination:
+            port:
+              number: 80
+            host: sharerecipe-profile-service
+      corsPolicy:
+        allowOrigins:
+          - exact: http://tstultiens.com
+          - exact: http://localhost:8080
+        allowMethods:
+          - POST
+          - GET
+          - OPTIONS
+        allowHeaders:
+          - Authorization
+          - Content-Type
+        maxAge: 24h
+        allowCredentials: false
+    - name: sharerecipe-kweet-service-latest-routes
+      match:
+        - uri:
+            prefix: /api/Kweet
+      route:
+        - destination:
+            port:
+              number: 80
+            host: sharerecipe-kweet-service
+      corsPolicy:
+        allowOrigins:
+          - exact: http://tstultiens.com
+          - exact: http://localhost:8080
+        allowMethods:
+          - POST
+          - OPTIONS
+        allowHeaders:
+          - Authorization
+          - Content-Type
+        maxAge: 24h
+        allowCredentials: false
+    - name: sharerecipe-follower-service-latest-routes
+      match:
+        - uri:
+            prefix: /api/Follower
+      route:
+        - destination:
+            port:
+              number: 80
+            host: sharerecipe-follower-service
+      corsPolicy:
+        allowOrigins:
+          - exact: http://tstultiens.com
+          - exact: http://localhost:8080
+        allowMethods:
+          - POST
+          - DELETE
+          - OPTIONS
+        allowHeaders:
+          - Authorization
+          - Content-Type
+        maxAge: 24h
+        allowCredentials: false

@@ -43,9 +43,9 @@ spec:
         - name: sharerecipe-follower-container
           image: kick1999/follower-sharerecipe:latest
           imagePullPolicy: Always
-          #envFrom:
-            #- secretRef:
-                #name: sharerecipe-follower-service-secret
+          envFrom:
+            - secretRef:
+                name: sharerecipe-follower-service-secret
           resources:
             limits:
               memory: 500Mi
