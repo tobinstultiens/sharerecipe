@@ -2,9 +2,13 @@
 minikube config set driver kvm2
 minikube start --cpus=8 --memory=16384
 minikube addons enable ingress
+# Create Keycloak
+kubectl create namespace keycloak
+kubectl apply -f storage/keycloak-storage.yaml
+helm install keycloak bitnami/keycloak --namespace keycloak --values keycloak/values.yaml
+#kubectl apply -f services/keycloak.yaml
+#(cd ingress/ ; sh keycloak-ingress.sh)
 # Create ShareRecipe
-kubectl apply -f services/keycloak.yaml
-(cd ingress/ ; sh keycloak-ingress.sh)
 kubectl apply -f sharerecipe-namespace.yaml
 kubectl config set-context sharerecipe --namespace=sharerecipe --cluster=minikube --user=minikube
 kubectl config use-context sharerecipe
@@ -28,6 +32,7 @@ minikube ssh -- sudo mkdir /mnt/data
 minikube ssh -- sudo mkdir /mnt/data/sharerecipe-profile-db
 minikube ssh -- sudo mkdir /mnt/data/sharerecipe-follower-db
 minikube ssh -- sudo mkdir /mnt/data/sharerecipe-kweet-db
+minikube ssh -- sudo mkdir /mnt/data/keycloak-db
 minikube ssh -- sudo mkdir /mnt/data/rabbit-store
 minikube ssh -- sudo mkdir /mnt/data/rabbit-store-1
 minikube ssh -- sudo mkdir /mnt/data/rabbit-store-2
