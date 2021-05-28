@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: sharerecipe-profile-container
-          image: kick1999/profile-sharerecipe:latest
+          image: kick1999/profile-sharerecipe:local
           imagePullPolicy: Always
           envFrom:
             - secretRef:
