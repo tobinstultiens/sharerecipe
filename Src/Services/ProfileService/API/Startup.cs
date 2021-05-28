@@ -28,6 +28,7 @@ namespace ShareRecipe.Services.ProfileService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigurations(Configuration);
+            services.AddHttpContextAccessor();
             services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),

@@ -1,13 +1,7 @@
 #!/bin/sh
-minikube config set driver kvm2
+#minikube config set driver kvm2
 minikube start --cpus=8 --memory=16384
-minikube addons enable ingress
-# Create Keycloak
-kubectl create namespace keycloak
-kubectl apply -f storage/keycloak-storage.yaml
-helm install keycloak bitnami/keycloak --namespace keycloak --values keycloak/values.yaml
-#kubectl apply -f services/keycloak.yaml
-#(cd ingress/ ; sh keycloak-ingress.sh)
+#minikube addons enable ingress
 # Create ShareRecipe
 kubectl apply -f sharerecipe-namespace.yaml
 kubectl config set-context sharerecipe --namespace=sharerecipe --cluster=minikube --user=minikube
