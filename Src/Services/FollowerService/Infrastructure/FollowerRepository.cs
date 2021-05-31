@@ -18,20 +18,14 @@ namespace ShareRecipe.Services.Follower.Infrastructure
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public FollowerAggregate Add(FollowerAggregate userProfile)
+        public ProfileAggregate Add(ProfileAggregate userProfile)
         {
-            return _context.Followers.Add(userProfile).Entity;
+            return _context.Profile.Add(userProfile).Entity;
         }
 
-        public FollowerAggregate Remove(Guid followerId, Guid followedId)
+        public async Task<ProfileAggregate> Find(Guid userid)
         {
-            var FollowerAggregate = new FollowerAggregate(followerId, followedId, DateTime.Now);
-            return _context.Followers.Remove(FollowerAggregate).Entity;
-        }
-
-        public async Task<List<FollowerAggregate>> GetAllFollowers(Guid followerId)
-        {
-            return await _context.Followers.Where(x => x.FollowerId == followerId).ToListAsync();
+            return await _context.Profile.FindAsync(userid);
         }
     }
 }

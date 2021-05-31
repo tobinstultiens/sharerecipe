@@ -21,7 +21,7 @@
 
     <ItemGroup>
       <Folder Include="Application\Behaviors" />
-      <Folder Include="Application\IntegrationEvents" />
+      <Folder Include="Application\DomainEventHandlers" />
       <Folder Include="Application\Models" />
       <Folder Include="Application\Queries" />
     </ItemGroup>

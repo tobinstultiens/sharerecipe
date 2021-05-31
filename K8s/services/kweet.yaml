@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: sharerecipe-kweet-container
-          image: kick1999/kweet-sharerecipe:local
+          image: kick1999/kweet-sharerecipe:latest
           imagePullPolicy: Always
           envFrom:
             - secretRef:

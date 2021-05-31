@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.Follower.Infrastructure.Configurations;
 
 namespace ShareRecipe.Services.Follower.Infrastructure
 {
     public class FollowerContext : UnitOfWork<FollowerContext>
     {
-        public DbSet<FollowerAggregate> Followers { get; set; }
+        public DbSet<ProfileAggregate> Profile { get; set; }
 
         public FollowerContext(DbContextOptions<FollowerContext> options) : base(options)
         {
@@ -26,7 +27,8 @@ namespace ShareRecipe.Services.Follower.Infrastructure
         /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new FollowerAggregateConfiguration());
+            modelBuilder.ApplyConfiguration(new FollowerConfiguration());
+            modelBuilder.ApplyConfiguration(new ProfileAggregateConfiguration());
             base.OnModelCreating(modelBuilder);
         } 
     }

@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
+using ShareRecipe.Services.KweetService.Infrastructure.Configurations;
 
 namespace ShareRecipe.Services.KweetService.Infrastructure
 {
     public class KweetContext : UnitOfWork<KweetContext>
     {
-        public DbSet<KweetAggregate> Kweets { get; set; }
+        public DbSet<ProfileAggregate> Profile { get; set; }
 
         public KweetContext(DbContextOptions<KweetContext> options) : base(options)
         {
@@ -26,7 +27,8 @@ namespace ShareRecipe.Services.KweetService.Infrastructure
         /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new KweetAggregateConfiguration());
+            modelBuilder.ApplyConfiguration(new KweetConfiguration());
+            modelBuilder.ApplyConfiguration(new ProfileAggregateConfiguration());
             base.OnModelCreating(modelBuilder);
         } 
     }

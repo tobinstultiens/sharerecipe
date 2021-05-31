@@ -7,7 +7,7 @@ using ShareRecipe.Services.Follower.Domain;
 
 namespace ShareRecipe.Services.Follower.API.Application.Validations
 {
-    public class CreatFollowerCommandValidator : AbstractValidator<CreateFollowerCommand>
+    public class CreatFollowerCommandValidator : AbstractValidator<CreatedFollowerCommand>
     {
          private readonly IFollowerRepository _followerRepository;
 
@@ -25,7 +25,7 @@ namespace ShareRecipe.Services.Follower.API.Application.Validations
                 .CustomAsync(CheckUserIdExistsAsync);
         }
 
-        private async Task CheckUserIdExistsAsync(Guid proposedId, ValidationContext<CreateFollowerCommand> context, CancellationToken cancellationToken)
+        private async Task CheckUserIdExistsAsync(Guid proposedId, ValidationContext<CreatedFollowerCommand> context, CancellationToken cancellationToken)
         {
             // Checks whether the user id is empty.
             if (proposedId == Guid.Empty)

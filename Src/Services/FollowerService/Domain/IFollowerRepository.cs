@@ -5,10 +5,9 @@ using ShareRecipe.Services.Common.Domain.Persistence;
 
 namespace ShareRecipe.Services.Follower.Domain
 {
-    public interface IFollowerRepository : IRepository<FollowerAggregate>
+    public interface IFollowerRepository : IRepository<ProfileAggregate>
     {
-        FollowerAggregate Add(FollowerAggregate followerAggregate);
-        FollowerAggregate Remove(Guid followerId, Guid followedId);
-        Task<List<FollowerAggregate>> GetAllFollowers(Guid followerId);
+        ProfileAggregate Add(ProfileAggregate profileAggregate);
+        Task<ProfileAggregate> Find(Guid userId);
     }
 }

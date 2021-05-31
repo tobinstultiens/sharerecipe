@@ -14,9 +14,9 @@ namespace ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggrega
         public UserProfileAggregate(Guid userId, string displayName, string description, string image)
         {
             SetId(userId);
-            AddDomainEvent(new UserCreatedDomainEvent(Id));
             SetDisplayName(displayName);
             UserProfile = new UserProfile(userId, description, image);
+            AddDomainEvent(new UserCreatedDomainEvent(Id, displayName, description, image));
         }
 
         public void SetDisplayName(string displayName)

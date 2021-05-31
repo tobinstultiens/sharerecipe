@@ -15,7 +15,6 @@
 
     <ItemGroup>
       <Folder Include="Application\Behaviors" />
-      <Folder Include="Application\IntegrationEvents" />
       <Folder Include="Application\Models" />
       <Folder Include="Application\Queries" />
     </ItemGroup>

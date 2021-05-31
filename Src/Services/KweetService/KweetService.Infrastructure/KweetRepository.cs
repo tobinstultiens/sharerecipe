@@ -18,26 +18,22 @@ namespace ShareRecipe.Services.KweetService.Infrastructure
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public KweetAggregate Add(KweetAggregate userProfile)
+        public ProfileAggregate Add(ProfileAggregate userProfile)
         {
-            return _context.Kweets.Add(userProfile).Entity;
+            return _context.Profile.Add(userProfile).Entity;
         }
 
-        public KweetAggregate Update(KweetAggregate userProfile)
+        public async Task<ProfileAggregate> GetAsync(Guid userId, CancellationToken cancellationToken)
         {
-            return _context.Update(userProfile).Entity;
+            return await _context.Profile.FindAsync(new object[]{userId}, cancellationToken);
         }
 
-        public async Task<KweetAggregate> GetAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<Kweet> GetByMessageAsync(string message)
         {
-            return await _context.Kweets.FindAsync(new object[]{userId}, cancellationToken);
-        }
-
-        public async Task<KweetAggregate> GetByMessageAsync(string message)
-        {
-            return await _context.Kweets.AsQueryable()
-                .Where(user => string.Equals(user.Message, message, StringComparison.CurrentCultureIgnoreCase))
-                .SingleOrDefaultAsync();
+            // return await _context.Profile.AsQueryable()
+                // .Where(user => string.Equals(user.Kweets.Find(kweet => kweet.Message == message).Message, message, StringComparison.CurrentCultureIgnoreCase))
+                // .SingleOrDefaultAsync();
+                return null;
         }
     }
 }

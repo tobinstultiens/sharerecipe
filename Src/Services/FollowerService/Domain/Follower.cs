@@ -1,25 +1,26 @@
-﻿using System;
+using System;
 using ShareRecipe.Services.Common.Domain;
 using ShareRecipe.Services.Follower.Domain.Events;
 
 namespace ShareRecipe.Services.Follower.Domain
 {
-    public class FollowerAggregate : Entity, IAggregateRoot
+    public class Follower : Entity
     {
         public Guid FollowerId { get; private set; }
-        public Guid FollowedId { get; private set; }
+        public Guid FollowingId { get; private set; }
         public DateTime FollowedAt { get; private set; }
 
-        protected FollowerAggregate()
+        protected Follower()
         {
+            
         }
 
-        public FollowerAggregate(Guid followerId, Guid followedId, DateTime followedAt)
+        public Follower(Guid followerId, Guid following)
         {
             SetFollowerId(followerId);
-            SetFollowedId(followedId);
-            SetFollowedAt(followedAt);
-            AddDomainEvent(new FollowerCreatedDomainEvent(followerId));
+            SetFollowingId(following, followerId);
+            SetFollowedAt(DateTime.UtcNow);
+            AddDomainEvent(new FollowerCreatedDomainEvent(followerId, following));
         }
 
         private void SetFollowedAt(DateTime followedAt)
@@ -27,11 +28,13 @@ namespace ShareRecipe.Services.Follower.Domain
             FollowedAt = followedAt;
         }
 
-        private void SetFollowedId(Guid followedId)
+        private void SetFollowingId(Guid followedId, Guid followerId)
         {
             if (followedId == Guid.Empty)
                 throw new ArgumentException("The followed id is empty.");
-            FollowedId = followedId;
+            if (followedId == followerId)
+                throw new ArgumentException("The followed and follower can't be the same person");
+            FollowingId = followedId;
         }
 
         private void SetFollowerId(Guid followerId)

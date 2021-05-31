@@ -30,7 +30,7 @@ namespace ShareRecipe.Services.Follower.API
             services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
-                Assembly.GetAssembly(typeof(CreateFollowerCommand)));
+                Assembly.GetAssembly(typeof(CreatedFollowerCommand)));
             services.AddScoped<IFactory<FollowerContext>, FollowerDatabaseFactory>();
             services.AddScoped<FollowerContext>(p => p.GetRequiredService<IFactory<FollowerContext>>().Create());
             services.AddScoped<IAggregateUnitOfWork>(p =>

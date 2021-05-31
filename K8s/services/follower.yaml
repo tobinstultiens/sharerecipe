@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: sharerecipe-follower-container
-          image: kick1999/follower-sharerecipe:local
+          image: kick1999/follower-sharerecipe:latest
           imagePullPolicy: Always
           envFrom:
             - secretRef:

@@ -5,31 +5,29 @@ using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates.E
 
 namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates
 {
-    public class KweetAggregate : Entity, IAggregateRoot
+    public class Kweet : Entity
     {
-        public Guid userId { get; private set; }
         public string Message { get; private set; }
         public List<Ingredient> Ingredients { get; private set; }
         public List<string> Directions { get; private set; }
 
-        protected KweetAggregate()
+        protected Kweet()
         {
         }
 
-        public KweetAggregate(Guid userId, string message, List<Ingredient> ingredients, List<string> directions)
+        public Kweet(string message, List<Ingredient> ingredients, List<string> directions)
         {
             SetId(Guid.NewGuid());
-            SetUserId(userId);
-            AddDomainEvent(new KweetCreatedDomainEvent(userId));
-            SetMessage(userId, message);
-            SetDirections(userId, directions);
+            AddDomainEvent(new KweetCreatedDomainEvent(Id));
+            SetMessage(Id, message);
+            SetDirections(Id, directions);
+            SetIngredients(Id, ingredients);
         }
 
-        private void SetUserId(Guid guid)
+        private void SetIngredients(Guid guid, List<Ingredient> ingredients)
         {
-            if (guid == Guid.Empty)
-                throw new ArgumentException("The user id is empty.");
-            userId = guid;
+            Ingredients = ingredients;
+            AddDomainEvent(new KweetIngredientsUpdatedDomainEvent(guid, ingredients));
         }
 
         private void SetDirections(Guid kweetId, List<string> directions)
