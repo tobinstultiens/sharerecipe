@@ -8,7 +8,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 {
     public class ProfileAggregate : Entity, IAggregateRoot
     {
-        public List<Kweet> Kweets { get; private set; }
+        public virtual List<Kweet> Kweets { get; private set; }
         public string DisplayName { get; private set; }
         public string ProfilePictureUrl { get; private set; }
         
@@ -26,15 +26,19 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         public Kweet CreateKweetAsync(string message)
         {
-            List<string> directions = null;
+            List<Direction> directions = null;
             List<Ingredient> ingredients = null;
+            int order = 0;
             using (StringReader sr = new StringReader(message)) {
                 string line;
                 while ((line = sr.ReadLine()) != null) {
                     if (line.StartsWith("-"))
                         ingredients.Add(new Ingredient(line, null));
                     if (Regex.IsMatch(line, @"^\d\."))
-                        directions.Add(line);
+                    {
+                        order++;
+                        directions.Add(new Direction(order, line));
+                    }
                 }
             }
 

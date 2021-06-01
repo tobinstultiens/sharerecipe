@@ -1,20 +1,40 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ.AutoSubscribe;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ShareRecipe.Services.Common.API.Startup
 {
     public class AutoSubscriberMessageDispatcher : IAutoSubscriberMessageDispatcher
     {
-        public void Dispatch<TMessage, TConsumer>(TMessage message, CancellationToken cancellationToken = new CancellationToken()) where TMessage : class where TConsumer : class, IConsume<TMessage>
+        private readonly IServiceProvider provider;
+
+        public AutoSubscriberMessageDispatcher(IServiceProvider provider)
         {
-            throw new System.NotImplementedException();
+            this.provider = provider;
         }
 
-        public Task DispatchAsync<TMessage, TConsumer>(TMessage message,
-            CancellationToken cancellationToken = new CancellationToken()) where TMessage : class where TConsumer : class, IConsumeAsync<TMessage>
+        public void Dispatch<TMessage, TConsumer>(TMessage message, CancellationToken cancellationToken)
+            where TMessage : class
+            where TConsumer : class, IConsume<TMessage>
         {
-            throw new System.NotImplementedException();
+            using (var scope = provider.CreateScope())
+            {
+                var consumer = scope.ServiceProvider.GetRequiredService<TConsumer>();
+                consumer.Consume(message);
+            }
+        }
+
+        public async Task DispatchAsync<TMessage, TConsumer>(TMessage message, CancellationToken cancellationToken)
+            where TMessage : class
+            where TConsumer : class, IConsumeAsync<TMessage>
+        {
+            using (var scope = provider.CreateScope())
+            {
+                var consumer = scope.ServiceProvider.GetRequiredService<TConsumer>();
+                await consumer.ConsumeAsync(message);
+            }
         }
     }
 }

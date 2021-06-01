@@ -1,7 +1,10 @@
 using System.Reflection;
+using EasyNetQ;
+using EasyNetQ.AutoSubscribe;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,12 +50,26 @@ namespace ShareRecipe.Services.ProfileService.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserProfileContext profileContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            profileContext.Database.Migrate();
+            
+            var services = app.ApplicationServices.CreateScope().ServiceProvider;
+
+            var lifeTime = services.GetService<IHostApplicationLifetime>();
+            var bus = services.GetService<IBus>();
+            lifeTime.ApplicationStarted.Register(() =>
+            {
+                var subscriber = new AutoSubscriber(bus, "User");
+                subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
+                subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            });
+            lifeTime.ApplicationStopped.Register(() => bus.Dispose());
 
             app.UseAuthentication();
             app.UseSwagger();

@@ -6,11 +6,11 @@ using ShareRecipe.Services.FollowerService.Domain;
 
 namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserImageUpdated
 {
-    public class UpdatedUserImageDomainHandler : IConsumeAsync<UpdatedUserImageIntegrationEvent>
+    public class UpdatedUserImageIntegrationHandler : IConsumeAsync<UpdatedUserImageIntegrationEvent>
     {
         private readonly IFollowerRepository _followerRepository;
 
-        public UpdatedUserImageDomainHandler(IFollowerRepository followerRepository)
+        public UpdatedUserImageIntegrationHandler(IFollowerRepository followerRepository)
         {
             _followerRepository = followerRepository;
         }

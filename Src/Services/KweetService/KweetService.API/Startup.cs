@@ -1,6 +1,9 @@
 using System.Reflection;
+using EasyNetQ;
+using EasyNetQ.AutoSubscribe;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,12 +47,26 @@ namespace ShareRecipe.Services.KweetService.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, KweetContext kweetContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            kweetContext.Database.Migrate();
+            
+            var services = app.ApplicationServices.CreateScope().ServiceProvider;
+
+            var lifeTime = services.GetService<IHostApplicationLifetime>();
+            var bus = services.GetService<IBus>();
+            lifeTime.ApplicationStarted.Register(() =>
+            {
+                var subscriber = new AutoSubscriber(bus, "User");
+                subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
+                subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            });
+            lifeTime.ApplicationStopped.Register(() => bus.Dispose());
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KweetService.API v1"));

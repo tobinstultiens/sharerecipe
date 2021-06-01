@@ -20,12 +20,12 @@ namespace ShareRecipe.Services.FollowerService.API.Application.Validations
             _followerRepository = followerRepository ?? throw new ArgumentNullException(nameof(followerRepository));
             
             RuleFor(createUserCommand => createUserCommand.FollowerId)
-                .CustomAsync(CheckUserIdExistsAsync);
+                .Custom(CheckUserIdExists);
             RuleFor(createUserCommand => createUserCommand.FollowedId)
-                .CustomAsync(CheckUserIdExistsAsync);
+                .Custom(CheckUserIdExists);
         }
 
-        private async Task CheckUserIdExistsAsync(Guid proposedId, ValidationContext<CreatedFollowerCommand> context, CancellationToken cancellationToken)
+        private void CheckUserIdExists(Guid proposedId, ValidationContext<CreatedFollowerCommand> context)
         {
             // Checks whether the user id is empty.
             if (proposedId == Guid.Empty)

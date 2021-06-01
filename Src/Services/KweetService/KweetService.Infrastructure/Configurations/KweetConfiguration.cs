@@ -12,7 +12,16 @@ namespace ShareRecipe.Services.KweetService.Infrastructure.Configurations
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Message)
                 .IsRequired(true);
-            builder.OwnsMany(p => p.Directions);
+            builder.OwnsMany(p => p.Directions, navigationBuilder =>
+            {
+                navigationBuilder.Ignore(p => p.DomainEvents);
+                navigationBuilder.Ignore(p => p.Id);
+                navigationBuilder.Property(p => p.Message)
+                    .IsRequired(true);
+                navigationBuilder.Property(p => p.Order)
+                    .HasMaxLength(50);
+                navigationBuilder.WithOwner();
+            });
 
             builder.OwnsMany<Ingredient>(p => p.Ingredients, navigationBuilder =>
             {

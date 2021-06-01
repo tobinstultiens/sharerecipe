@@ -7,9 +7,9 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
     public class KweetDirectionsUpdatedDomainEvent: DomainEvent
     {
         public Guid KweetId { get; }
-        public List<string> Directions { get; }
+        public List<Direction> Directions { get; }
 
-        public KweetDirectionsUpdatedDomainEvent(Guid kweetId, List<string> directions)
+        public KweetDirectionsUpdatedDomainEvent(Guid kweetId, List<Direction> directions)
         {
             KweetId = kweetId;
             Directions = directions;

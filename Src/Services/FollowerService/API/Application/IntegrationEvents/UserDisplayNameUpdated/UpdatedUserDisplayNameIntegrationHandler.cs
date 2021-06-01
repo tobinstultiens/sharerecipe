@@ -6,11 +6,11 @@ using ShareRecipe.Services.FollowerService.Domain;
 
 namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserDisplayNameUpdated
 {
-    public class UpdatedUserDisplayNameDomainHandler : IConsumeAsync<UpdatedUserDisplayNameIntegrationEvent>
+    public class UpdatedUserDisplayNameIntegrationHandler : IConsumeAsync<UpdatedUserDisplayNameIntegrationEvent>
     {
         private readonly IFollowerRepository _followerRepository;
 
-        public UpdatedUserDisplayNameDomainHandler(IFollowerRepository followerRepository)
+        public UpdatedUserDisplayNameIntegrationHandler(IFollowerRepository followerRepository)
         {
             _followerRepository = followerRepository;
         }
