@@ -2,10 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using ShareRecipe.Services.Follower.API.Application.Commands;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.API.Application.Commands;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.API.Application.Validations
+namespace ShareRecipe.Services.FollowerService.API.Application.Validations
 {
     public class CreatFollowerCommandValidator : AbstractValidator<CreatedFollowerCommand>
     {

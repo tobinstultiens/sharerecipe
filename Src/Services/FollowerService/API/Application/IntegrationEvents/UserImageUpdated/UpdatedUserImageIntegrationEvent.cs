@@ -1,7 +1,7 @@
 using System;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.API.Application.IntegrationEvents.UserImageUpdated
+namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserImageUpdated
 {
     public class UpdatedUserImageIntegrationEvent : DomainEvent
     {

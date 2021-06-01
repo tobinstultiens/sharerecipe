@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShareRecipe.Services.Follower.API.Application.Commands;
+using ShareRecipe.Services.FollowerService.API.Application.Commands;
 
-namespace ShareRecipe.Services.Follower.API.Controllers
+namespace ShareRecipe.Services.FollowerService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

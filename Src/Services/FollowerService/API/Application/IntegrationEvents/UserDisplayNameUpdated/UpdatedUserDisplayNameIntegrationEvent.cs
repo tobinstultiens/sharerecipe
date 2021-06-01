@@ -1,7 +1,7 @@
 using System;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.API.Application.IntegrationEvents.UserDisplayNameUpdated
+namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserDisplayNameUpdated
 {
     public class UpdatedUserDisplayNameIntegrationEvent : DomainEvent
     {

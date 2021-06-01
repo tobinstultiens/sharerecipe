@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.API.Application.Commands
+namespace ShareRecipe.Services.FollowerService.API.Application.Commands
 {
     public sealed class CreatedFollowerCommandHandler : IRequestHandler<CreatedFollowerCommand, CommandResponse>
     {

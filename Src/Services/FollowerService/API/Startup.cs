@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ShareRecipe.Services.Common.API;
 using ShareRecipe.Services.Common.Infrastructure;
-using ShareRecipe.Services.Follower.API.Application.Commands;
-using ShareRecipe.Services.Follower.Domain;
-using ShareRecipe.Services.Follower.Infrastructure;
+using ShareRecipe.Services.FollowerService.API.Application.Commands;
+using ShareRecipe.Services.FollowerService.Domain;
+using ShareRecipe.Services.FollowerService.Infrastructure;
 
-namespace ShareRecipe.Services.Follower.API
+namespace ShareRecipe.Services.FollowerService.API
 {
     public class Startup
     {

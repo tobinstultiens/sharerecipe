@@ -1,11 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
-using EasyNetQ.Topology;
 using MediatR;
-using ShareRecipe.Services.Follower.Domain.Events;
+using ShareRecipe.Services.FollowerService.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.API.Application.DomainEventHandlers
+namespace ShareRecipe.Services.FollowerService.API.Application.DomainEventHandlers
 {
     public class CreatedFollowerDomainHandler : INotificationHandler<FollowerCreatedDomainEvent>
     {

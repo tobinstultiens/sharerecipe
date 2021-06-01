@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using ShareRecipe.Services.Common.Domain;
-using ShareRecipe.Services.Follower.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.Domain
+namespace ShareRecipe.Services.FollowerService.Domain
 {
     public class ProfileAggregate : Entity, IAggregateRoot
     {
-        public List<Follower> Followers { get; private set; }
-        public List<Follower> Following { get; private set; }
+        public virtual List<Follower> Followers { get; private set; }
+        public virtual List<Follower> Following { get; private set; }
         public string DisplayName { get; private set; }
         public string ProfilePictureUrl { get; private set; }
         

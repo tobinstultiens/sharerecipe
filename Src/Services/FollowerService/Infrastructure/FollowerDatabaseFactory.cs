@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ShareRecipe.Services.Common.Infrastructure;
 
-namespace ShareRecipe.Services.Follower.Infrastructure
+namespace ShareRecipe.Services.FollowerService.Infrastructure
 {
     public sealed class FollowerDatabaseFactory : DatabaseFactory<FollowerContext>
     {

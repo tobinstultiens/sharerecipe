@@ -1,7 +1,7 @@
 using System;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.API.Application.DomainEventHandlers
+namespace ShareRecipe.Services.FollowerService.API.Application.DomainEventHandlers
 {
     public class CreatedFollowerIntegrationEvent : DomainEvent
     {

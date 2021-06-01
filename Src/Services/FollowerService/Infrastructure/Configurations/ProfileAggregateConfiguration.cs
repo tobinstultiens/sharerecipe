@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.Infrastructure.Configurations
+namespace ShareRecipe.Services.FollowerService.Infrastructure.Configurations
 {
     public class ProfileAggregateConfiguration: IEntityTypeConfiguration<ProfileAggregate>
     {
@@ -17,23 +17,13 @@ namespace ShareRecipe.Services.Follower.Infrastructure.Configurations
             
             builder.HasMany(p => p.Followers)
                 .WithOne()
-                .HasForeignKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            builder
-                .Navigation(p => p.Followers)
-                .HasField("followers")
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
+                .HasForeignKey(p => p.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
             
             builder.HasMany(p => p.Following)
                 .WithOne()
-                .HasForeignKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            builder
-                .Navigation(p => p.Following)
-                .HasField("following")
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
+                .HasForeignKey(p => p.FollowingId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>ShareRecipe.Services.Follower.API</AssemblyName>
-        <RootNamespace>ShareRecipe.Services.Follower.API</RootNamespace>
+        <AssemblyName>ShareRecipe.Services.FollowerService.API</AssemblyName>
+        <RootNamespace>ShareRecipe.Services.FollowerService.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

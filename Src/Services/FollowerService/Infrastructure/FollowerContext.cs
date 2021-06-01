@@ -2,10 +2,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShareRecipe.Services.Common.Infrastructure;
-using ShareRecipe.Services.Follower.Domain;
-using ShareRecipe.Services.Follower.Infrastructure.Configurations;
+using ShareRecipe.Services.FollowerService.Domain;
+using ShareRecipe.Services.FollowerService.Infrastructure.Configurations;
 
-namespace ShareRecipe.Services.Follower.Infrastructure
+namespace ShareRecipe.Services.FollowerService.Infrastructure
 {
     public class FollowerContext : UnitOfWork<FollowerContext>
     {
@@ -27,8 +27,8 @@ namespace ShareRecipe.Services.Follower.Infrastructure
         /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new FollowerConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileAggregateConfiguration());
+            modelBuilder.ApplyConfiguration(new FollowerConfiguration());
             base.OnModelCreating(modelBuilder);
         } 
     }

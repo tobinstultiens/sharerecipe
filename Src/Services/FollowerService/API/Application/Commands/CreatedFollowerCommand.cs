@@ -2,7 +2,7 @@ using System;
 using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
 
-namespace ShareRecipe.Services.Follower.API.Application.Commands
+namespace ShareRecipe.Services.FollowerService.API.Application.Commands
 {
     public class CreatedFollowerCommand : IRequest<CommandResponse>
     {

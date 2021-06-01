@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
-using EasyNetQ.Consumer;
-using MediatR;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.API.Application.IntegrationEvents.UserCreated
+namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserCreated
 {
     public class CreatedUserDomainHandler : IConsumeAsync<CreatedUserIntegrationEvent>
     {

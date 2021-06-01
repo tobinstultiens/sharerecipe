@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using ShareRecipe.Services.Common.Domain.Persistence;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.Infrastructure
+namespace ShareRecipe.Services.FollowerService.Infrastructure
 {
     public class FollowerRepository : IFollowerRepository
     {

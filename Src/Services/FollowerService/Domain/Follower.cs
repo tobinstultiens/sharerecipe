@@ -1,8 +1,8 @@
 using System;
 using ShareRecipe.Services.Common.Domain;
-using ShareRecipe.Services.Follower.Domain.Events;
+using ShareRecipe.Services.FollowerService.Domain.Events;
 
-namespace ShareRecipe.Services.Follower.Domain
+namespace ShareRecipe.Services.FollowerService.Domain
 {
     public class Follower : Entity
     {

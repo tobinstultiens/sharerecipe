@@ -2,10 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ.AutoSubscribe;
-using MediatR;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.API.Application.IntegrationEvents.UserImageUpdated
+namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserImageUpdated
 {
     public class UpdatedUserImageDomainHandler : IConsumeAsync<UpdatedUserImageIntegrationEvent>
     {

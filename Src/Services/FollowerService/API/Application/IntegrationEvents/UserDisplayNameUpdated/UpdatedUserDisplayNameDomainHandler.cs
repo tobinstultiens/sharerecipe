@@ -1,12 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
-using MediatR;
-using ShareRecipe.Services.Follower.Domain;
+using ShareRecipe.Services.FollowerService.Domain;
 
-namespace ShareRecipe.Services.Follower.API.Application.IntegrationEvents.UserDisplayNameUpdated
+namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents.UserDisplayNameUpdated
 {
     public class UpdatedUserDisplayNameDomainHandler : IConsumeAsync<UpdatedUserDisplayNameIntegrationEvent>
     {
