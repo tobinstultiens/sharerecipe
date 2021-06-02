@@ -15,6 +15,7 @@ namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents
             _followerRepository = followerRepository;
         }
 
+        [ForTopic("User.ImageUpdated")]
         public async Task ConsumeAsync(UpdatedUserImageIntegrationEvent message,
             CancellationToken cancellationToken = new CancellationToken())
         {

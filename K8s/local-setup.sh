@@ -37,10 +37,9 @@ minikube ssh -- sudo chown -R 10001:0 /mnt/data
 kubectl apply -f storage/sharerecipe-storage.yaml
 kubectl apply -f storage/
 # Install rabbitmq
-kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
-kubectl apply -f RabbitMQ
-# Setup EventStore
-kubectl apply -f eventstore/eventstore.deployment.yaml
+#kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
+#kubectl apply -f RabbitMQ
+helm install rabbitmq bitnami/rabbitmq --set auth.password=guest --set auth.username=guest
 # Setup databases
 kubectl apply -f databases
 # Setup Gateway

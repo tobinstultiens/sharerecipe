@@ -6,15 +6,16 @@ using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserDisplayNameUpdated
 {
-    public class UpdatedUserDisplayNameDomainHandler : IConsumeAsync<UpdatedUserDisplayNameIntegrationEvent>
+    public class UpdatedUserDisplayNameIntegrationHandler : IConsumeAsync<UpdatedUserDisplayNameIntegrationEvent>
     {
         private readonly IKweetRepository _kweetRepository;
 
-        public UpdatedUserDisplayNameDomainHandler(IKweetRepository kweetRepository)
+        public UpdatedUserDisplayNameIntegrationHandler(IKweetRepository kweetRepository)
         {
             _kweetRepository = kweetRepository;
         }
 
+        [ForTopic("User.DisplayNameUpdated")]
         public async Task ConsumeAsync(UpdatedUserDisplayNameIntegrationEvent message,
             CancellationToken cancellationToken = new CancellationToken())
         {

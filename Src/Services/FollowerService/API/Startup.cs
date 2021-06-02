@@ -76,7 +76,7 @@ namespace ShareRecipe.Services.FollowerService.API
             var bus = services.GetService<IBus>();
             lifeTime.ApplicationStarted.Register(() =>
             {
-                var subscriber = new AutoSubscriber(bus, "User");
+                var subscriber = new AutoSubscriber(bus, "Follower");
                 subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
                 subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
             });

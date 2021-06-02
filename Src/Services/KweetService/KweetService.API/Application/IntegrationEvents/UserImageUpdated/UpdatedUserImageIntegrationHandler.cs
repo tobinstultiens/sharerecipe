@@ -6,15 +6,16 @@ using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserImageUpdated
 {
-    public class UpdatedUserImageDomainHandler : IConsumeAsync<UpdatedUserImageIntegrationEvent>
+    public class UpdatedUserImageIntegrationHandler : IConsumeAsync<UpdatedUserImageIntegrationEvent>
     {
         private readonly IKweetRepository _kweetRepository;
 
-        public UpdatedUserImageDomainHandler(IKweetRepository kweetRepository)
+        public UpdatedUserImageIntegrationHandler(IKweetRepository kweetRepository)
         {
             _kweetRepository = kweetRepository;
         }
 
+        [ForTopic("User.ImageUpdated")]
         public async Task ConsumeAsync(UpdatedUserImageIntegrationEvent message,
             CancellationToken cancellationToken = new CancellationToken())
         {

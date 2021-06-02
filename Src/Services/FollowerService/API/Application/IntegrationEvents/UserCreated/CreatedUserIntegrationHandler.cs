@@ -15,6 +15,7 @@ namespace ShareRecipe.Services.FollowerService.API.Application.IntegrationEvents
             _followerRepository = followerRepository;
         }
 
+        [ForTopic("User.Created")]
         public async Task ConsumeAsync(CreatedUserIntegrationEvent message, CancellationToken cancellationToken)
         {
             ProfileAggregate aggregate = new ProfileAggregate(message.UserId, message.DisplayName, message.Image);

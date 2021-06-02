@@ -62,7 +62,7 @@ namespace ShareRecipe.Services.KweetService.API
             var bus = services.GetService<IBus>();
             lifeTime.ApplicationStarted.Register(() =>
             {
-                var subscriber = new AutoSubscriber(bus, "User");
+                var subscriber = new AutoSubscriber(bus, "Kweet");
                 subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
                 subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
             });
