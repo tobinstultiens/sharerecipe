@@ -43,5 +43,7 @@ kubectl apply -f RabbitMQ
 kubectl apply -f eventstore/eventstore.deployment.yaml
 # Setup databases
 kubectl apply -f databases
+# Setup Gateway
+kubectl apply -f gateway
 # Setup services
 kubectl apply -f services

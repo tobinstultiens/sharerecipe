@@ -7,7 +7,7 @@ using ShareRecipe.Services.KweetService.API.Application.Commands;
 namespace ShareRecipe.Services.KweetService.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class KweetController : ControllerBase
     {
         private readonly IMediator _mediator;

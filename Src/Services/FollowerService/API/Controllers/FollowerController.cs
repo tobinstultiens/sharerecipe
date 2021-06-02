@@ -7,7 +7,7 @@ using ShareRecipe.Services.FollowerService.API.Application.Commands;
 namespace ShareRecipe.Services.FollowerService.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class FollowerController : ControllerBase
     {
         private readonly IMediator _mediator;

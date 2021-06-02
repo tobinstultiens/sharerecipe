@@ -13,9 +13,6 @@ spec:
         protocol: HTTP
       hosts:
         - "*"
-      #tls:
-      #  mode: SIMPLE
-      #  credentialName: ext-host-cert
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

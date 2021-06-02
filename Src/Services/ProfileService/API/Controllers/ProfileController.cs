@@ -7,7 +7,7 @@ using ShareRecipe.Services.ProfileService.API.Application.Commands;
 namespace ShareRecipe.Services.ProfileService.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProfileController : ControllerBase
     {
         private readonly IMediator _mediator;
