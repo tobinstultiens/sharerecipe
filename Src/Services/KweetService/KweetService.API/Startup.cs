@@ -12,6 +12,9 @@ using Microsoft.OpenApi.Models;
 using ShareRecipe.Services.Common.API;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
+using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserCreated;
+using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserDisplayNameUpdated;
+using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserImageUpdated;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 using ShareRecipe.Services.KweetService.Infrastructure;
 
@@ -29,7 +32,11 @@ namespace ShareRecipe.Services.KweetService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigurations(Configuration);
-            services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
+            //services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
+            services.AddSingleton<IBus>(RabbitHutch.CreateBus(Configuration.GetValue<string>("RabbitMQ")));
+            services.AddScoped<CreatedUserIntegrationHandler>();
+            services.AddScoped<UpdatedUserDisplayNameIntegrationHandler>();
+            services.AddScoped<UpdatedUserImageIntegrationHandler>();
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
                 Assembly.GetAssembly(typeof(CreateKweetCommand)));
