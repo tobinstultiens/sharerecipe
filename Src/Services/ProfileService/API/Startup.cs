@@ -59,23 +59,13 @@ namespace ShareRecipe.Services.ProfileService.API
             
             profileContext.Database.Migrate();
             
-            var services = app.ApplicationServices.CreateScope().ServiceProvider;
-
-            var lifeTime = services.GetService<IHostApplicationLifetime>();
-            var bus = services.GetService<IBus>();
-            lifeTime.ApplicationStarted.Register(() =>
-            {
-                var subscriber = new AutoSubscriber(bus, "User");
-                subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
-                subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
-            });
-            lifeTime.ApplicationStopped.Register(() => bus.Dispose());
-
             app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProfileService.API v1"));
             app.UseRouting();
 
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

@@ -1,8 +1,10 @@
 using System;
+using EasyNetQ;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserImageUpdated
+namespace ShareRecipe.Services.Common.API.IntegrationEvents
 {
+    [Queue("UpdatedUserImageIntegrationEvent", ExchangeName = "UpdatedUserImageIntegrationExchange")]
     public class UpdatedUserImageIntegrationEvent : DomainEvent
     {
         public Guid UserId { get; }

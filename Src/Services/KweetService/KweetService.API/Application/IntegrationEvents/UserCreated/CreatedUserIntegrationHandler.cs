@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ.AutoSubscribe;
+using ShareRecipe.Services.Common.API.IntegrationEvents;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserCreated
@@ -15,7 +16,6 @@ namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.Us
             _kweetRepository = kweetRepository;
         }
 
-        [ForTopic("User.Created")]
         public async Task ConsumeAsync(CreatedUserIntegrationEvent message, CancellationToken cancellationToken)
         {
             ProfileAggregate aggregate = new ProfileAggregate(message.UserId, message.DisplayName, message.Image);

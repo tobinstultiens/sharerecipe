@@ -37,6 +37,15 @@ namespace ShareRecipe.Services.FollowerService.API
             services.AddConfigurations(Configuration);
             //services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddSingleton<IBus>(RabbitHutch.CreateBus(Configuration.GetValue<string>("RabbitMQ")));
+            services.AddSingleton<AutoSubscriberMessageDispatcher>();
+            services.AddSingleton<AutoSubscriber>(provider =>
+            {
+                var subscriber = new AutoSubscriber(provider.GetRequiredService<IBus>(), "Follower")
+                {
+                    AutoSubscriberMessageDispatcher = provider.GetRequiredService<AutoSubscriberMessageDispatcher>()
+                };
+                return subscriber;
+            });
             
             services.AddScoped<CreatedUserIntegrationHandler>();
             services.AddScoped<UpdatedUserDisplayNameIntegrationHandler>();
@@ -70,18 +79,20 @@ namespace ShareRecipe.Services.FollowerService.API
             
             followerContext.Database.Migrate();
             
-            var services = app.ApplicationServices.CreateScope().ServiceProvider;
+            // var services = app.ApplicationServices.CreateScope().ServiceProvider;
+            //
+            // var lifeTime = services.GetService<IHostApplicationLifetime>();
+            // var bus = services.GetService<IBus>();
+            // lifeTime.ApplicationStarted.Register(() =>
+            // {
+            //     var subscriber = new AutoSubscriber(bus, "Follower");
+            //     subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
+            //     //subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            // });
+            // lifeTime.ApplicationStopped.Register(() => bus.Dispose());
 
-            var lifeTime = services.GetService<IHostApplicationLifetime>();
-            var bus = services.GetService<IBus>();
-            lifeTime.ApplicationStarted.Register(() =>
-            {
-                var subscriber = new AutoSubscriber(bus, "Follower");
-                subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
-                subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
-            });
-            lifeTime.ApplicationStopped.Register(() => bus.Dispose());
-
+            app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

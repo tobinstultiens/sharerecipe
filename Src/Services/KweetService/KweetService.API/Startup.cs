@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ShareRecipe.Services.Common.API;
+using ShareRecipe.Services.Common.API.Startup;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
 using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserCreated;
@@ -34,9 +35,21 @@ namespace ShareRecipe.Services.KweetService.API
             services.AddConfigurations(Configuration);
             //services.RegisterEasyNetQ(Configuration.GetValue<string>("RabbitMQ"));
             services.AddSingleton<IBus>(RabbitHutch.CreateBus(Configuration.GetValue<string>("RabbitMQ")));
+            services.AddSingleton<AutoSubscriberMessageDispatcher>();
+            services.AddSingleton<AutoSubscriber>(provider =>
+            {
+                var subscriber = new AutoSubscriber(provider.GetRequiredService<IBus>(), "Kweet")
+                {
+                    AutoSubscriberMessageDispatcher = provider.GetRequiredService<AutoSubscriberMessageDispatcher>()
+                };
+                return subscriber;
+            });
+
+            // message handlers
             services.AddScoped<CreatedUserIntegrationHandler>();
             services.AddScoped<UpdatedUserDisplayNameIntegrationHandler>();
             services.AddScoped<UpdatedUserImageIntegrationHandler>();
+            
             services.AddLogging(p => p.AddConsole());
             services.AddDefaultApplicationServices(Assembly.GetAssembly(typeof(Startup)),
                 Assembly.GetAssembly(typeof(CreateKweetCommand)));
@@ -63,17 +76,19 @@ namespace ShareRecipe.Services.KweetService.API
             
             kweetContext.Database.Migrate();
             
-            var services = app.ApplicationServices.CreateScope().ServiceProvider;
-
-            var lifeTime = services.GetService<IHostApplicationLifetime>();
-            var bus = services.GetService<IBus>();
-            lifeTime.ApplicationStarted.Register(() =>
-            {
-                var subscriber = new AutoSubscriber(bus, "Kweet");
-                subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
-                subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
-            });
-            lifeTime.ApplicationStopped.Register(() => bus.Dispose());
+            // var services = app.ApplicationServices.CreateScope().ServiceProvider;
+            //
+            // var lifeTime = services.GetService<IHostApplicationLifetime>();
+            // var bus = services.GetService<IBus>();
+            // lifeTime.ApplicationStarted.Register(() =>
+            // {
+            //     var subscriber = new AutoSubscriber(bus, "Kweet");
+            //     subscriber.Subscribe(Assembly.GetExecutingAssembly().GetTypes());
+            //     // subscriber.SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            // });
+            // lifeTime.ApplicationStopped.Register(() => bus.Dispose());
+            
+            app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KweetService.API v1"));

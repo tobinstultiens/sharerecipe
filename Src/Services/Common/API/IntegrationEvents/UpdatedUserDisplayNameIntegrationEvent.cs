@@ -1,8 +1,10 @@
 using System;
+using EasyNetQ;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.ProfileService.API.Application.DomainEventHandlers.UserDisplayNameUpdated
+namespace ShareRecipe.Services.Common.API.IntegrationEvents
 {
+    [Queue("UpdatedUserDisplayNameIntegrationEvent", ExchangeName = "UpdatedUserDisplayNameIntegrationExchange")]
     public class UpdatedUserDisplayNameIntegrationEvent : DomainEvent
     {
         public Guid UserId { get; }

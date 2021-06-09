@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
 using MediatR;
+using ShareRecipe.Services.Common.API.IntegrationEvents;
 using ShareRecipe.Services.ProfileService.Domain.AggregatesModel.UserAggregates.Events;
 
 namespace ShareRecipe.Services.ProfileService.API.Application.DomainEventHandlers.UserImageUpdated
@@ -18,7 +19,7 @@ namespace ShareRecipe.Services.ProfileService.API.Application.DomainEventHandler
         public Task Handle(UserProfileImageUpdateDomainEvent notification, CancellationToken cancellationToken)
         {
             UpdatedUserImageIntegrationEvent integrationEvent = new(notification.UserId, notification.Image);
-            _bus.PubSub.PublishAsync(integrationEvent, configuration => configuration.WithTopic("User.ImageUpdated"), cancellationToken);
+            _bus.PubSub.PublishAsync(integrationEvent, cancellationToken);
             return Task.CompletedTask;
         }
     }

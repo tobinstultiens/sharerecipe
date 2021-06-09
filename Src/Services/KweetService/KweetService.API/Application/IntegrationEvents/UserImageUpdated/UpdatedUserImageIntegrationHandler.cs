@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ.AutoSubscribe;
+using ShareRecipe.Services.Common.API.IntegrationEvents;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserImageUpdated
@@ -15,7 +16,6 @@ namespace ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.Us
             _kweetRepository = kweetRepository;
         }
 
-        [ForTopic("User.ImageUpdated")]
         public async Task ConsumeAsync(UpdatedUserImageIntegrationEvent message,
             CancellationToken cancellationToken = new CancellationToken())
         {

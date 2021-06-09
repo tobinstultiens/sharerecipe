@@ -1,8 +1,10 @@
 using System;
+using EasyNetQ;
 using ShareRecipe.Services.Common.Domain.Events;
 
-namespace ShareRecipe.Services.ProfileService.API.Application.DomainEventHandlers.UserCreated
+namespace ShareRecipe.Services.Common.API.IntegrationEvents
 {
+    [Queue("CreatedUserIntegrationEvent", ExchangeName = "CreatedUserIntegrationExchange")]
     public class CreatedUserIntegrationEvent : DomainEvent
     {
         public Guid UserId { get; }
