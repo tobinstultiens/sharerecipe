@@ -60,11 +60,11 @@ namespace ShareRecipe.Services.FollowerService.API
                 p.GetRequiredService<IFactory<FollowerContext>>().Create());
             services.AddScoped<IFollowerRepository, FollowerRepository>();
             services.AddControllers();
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "FollowerService.API", Version = "v1"});
             });
+            services.AddKeycloak(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +92,9 @@ namespace ShareRecipe.Services.FollowerService.API
             // lifeTime.ApplicationStopped.Register(() => bus.Dispose());
 
             app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
             
             app.UseHttpsRedirection();
 

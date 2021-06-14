@@ -59,6 +59,7 @@ namespace ShareRecipe.Services.ProfileService.API
             
             profileContext.Database.Migrate();
             
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProfileService.API v1"));

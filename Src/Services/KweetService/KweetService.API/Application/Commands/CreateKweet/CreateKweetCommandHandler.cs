@@ -5,7 +5,7 @@ using MediatR;
 using ShareRecipe.Services.Common.API.CQRS;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
-namespace ShareRecipe.Services.KweetService.API.Application.Commands
+namespace ShareRecipe.Services.KweetService.API.Application.Commands.CreateKweet
 {
     public sealed class CreateKweetCommandHandler : IRequestHandler<CreateKweetCommand, CommandResponse>
     {

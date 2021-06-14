@@ -13,6 +13,7 @@ using ShareRecipe.Services.Common.API;
 using ShareRecipe.Services.Common.API.Startup;
 using ShareRecipe.Services.Common.Infrastructure;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
+using ShareRecipe.Services.KweetService.API.Application.Commands.CreateKweet;
 using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserCreated;
 using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserDisplayNameUpdated;
 using ShareRecipe.Services.KweetService.API.Application.IntegrationEvents.UserImageUpdated;
@@ -89,10 +90,15 @@ namespace ShareRecipe.Services.KweetService.API
             // lifeTime.ApplicationStopped.Register(() => bus.Dispose());
             
             app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(Assembly.GetExecutingAssembly().GetTypes());
+            
+            
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KweetService.API v1"));
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

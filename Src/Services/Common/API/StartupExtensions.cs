@@ -42,7 +42,7 @@ namespace ShareRecipe.Services.Common.API
                     options.Authority = configuration["Authentication:KeycloakAuthentication:ServerAddress"] + "/auth/realms/" + configuration["Authentication:KeycloakAuthentication:Realm"];
                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        ValidAudiences = new string[] { "curl", "financeApplication", "accountingApplication", "swagger"}
+                        ValidAudiences = new string[] { "curl", "vueapp", "accountingApplication", "swagger"}
                     };
                     options.RequireHttpsMetadata = false; //for test only!
                     options.SaveToken = true;

@@ -25,7 +25,6 @@ namespace ShareRecipe.Services.ProfileService.API.Application.Commands
         public async Task<CommandResponse> Handle(CreateUserProfileCommand request, CancellationToken cancellationToken)
         {
             //TODO check if this is comparable
-            var userid=_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserProfileAggregate userProfileAggregate =
                 new(request.UserId, request.UserDisplayName, request.UserProfileDescription, request.UserProfileImage);
 

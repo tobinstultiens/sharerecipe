@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using ShareRecipe.Services.KweetService.API.Application.Commands;
+using ShareRecipe.Services.KweetService.API.Application.Commands.CreateKweet;
 using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
 
 namespace ShareRecipe.Services.KweetService.API.Application.Validations
