@@ -47,8 +47,11 @@ spec:
             - secretRef:
                 name: sharerecipe-kweet-service-secret
           resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
             limits:
-              memory: 500Mi
-              cpu: 300m
+              memory: 250Mi
+              cpu: 50m
           ports:
             - containerPort: 80
