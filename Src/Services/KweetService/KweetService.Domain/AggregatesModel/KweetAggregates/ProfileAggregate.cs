@@ -8,13 +8,15 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 {
     public class ProfileAggregate : Entity, IAggregateRoot
     {
-        public virtual List<Kweet> Kweets { get; private set; }
+        private List<Kweet> kweets;
+        public virtual IReadOnlyCollection<Kweet> Kweets => kweets.AsReadOnly();
+        //public virtual List<Kweet> Kweets { get; private set; }
         public string DisplayName { get; private set; }
         public string ProfilePictureUrl { get; private set; }
-        
+
         protected ProfileAggregate()
         {
-            Kweets = new List<Kweet>();
+            kweets = new List<Kweet>();
         }
 
         public ProfileAggregate(Guid userid, string displayName, string profilePictureUrl)
@@ -26,8 +28,8 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         public Kweet CreateKweetAsync(string message)
         {
-            List<Direction> directions = null;
-            List<Ingredient> ingredients = null;
+            List<Direction> directions = new List<Direction>();
+            List<Ingredient> ingredients = new List<Ingredient>();
             int order = 0;
             using (StringReader sr = new StringReader(message)) {
                 string line;
@@ -42,8 +44,8 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
                 }
             }
 
-            Kweet kweet = new(message, ingredients, directions);
-            Kweets.Add(kweet);
+            Kweet kweet = new(message, Id, ingredients, directions);
+            kweets.Add(kweet);
             return kweet;
         }
 

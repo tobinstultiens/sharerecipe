@@ -20,7 +20,8 @@ namespace ShareRecipe.Services.KweetService.API.Application.Commands.CreateKweet
         public async Task<CommandResponse> Handle(CreateKweetCommand request, CancellationToken cancellationToken)
         {
             ProfileAggregate aggregate = await _kweetRepository.GetAsync(request.UserId, cancellationToken);
-            aggregate.CreateKweetAsync(request.Message);
+            Kweet kweet = aggregate.CreateKweetAsync(request.Message);
+            kweet = _kweetRepository.TrackKweet(kweet);
 
             var success = await _kweetRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             

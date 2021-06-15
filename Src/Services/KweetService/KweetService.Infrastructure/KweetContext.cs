@@ -10,6 +10,7 @@ namespace ShareRecipe.Services.KweetService.Infrastructure
     public class KweetContext : UnitOfWork<KweetContext>
     {
         public DbSet<ProfileAggregate> Profile { get; set; }
+        public DbSet<Kweet> Kweets { get; set; }
 
         public KweetContext(DbContextOptions<KweetContext> options) : base(options)
         {

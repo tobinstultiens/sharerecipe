@@ -42,5 +42,10 @@ namespace ShareRecipe.Services.KweetService.Infrastructure
             // .SingleOrDefaultAsync();
             return null;
         }
+
+        public Kweet TrackKweet(Kweet kweet)
+        {
+            return _context.Kweets.Add(kweet).Entity;
+        }
     }
 }

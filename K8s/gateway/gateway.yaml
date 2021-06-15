@@ -28,7 +28,7 @@ spec:
     - name: sharerecipe-profile-service-latest-routes
       match:
         - uri:
-            prefix: /api/Profile
+            prefix: /api/profile
       route:
         - destination:
             port:
@@ -50,7 +50,7 @@ spec:
     - name: sharerecipe-kweet-service-latest-routes
       match:
         - uri:
-            prefix: /api/Kweet
+            prefix: /api/kweet
       route:
         - destination:
             port:
@@ -72,7 +72,7 @@ spec:
     - name: sharerecipe-follower-service-latest-routes
       match:
         - uri:
-            prefix: /api/Follower
+            prefix: /api/follower
       route:
         - destination:
             port:

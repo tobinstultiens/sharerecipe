@@ -12,5 +12,6 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
         Task<ProfileAggregate> GetAsync(Guid userId, CancellationToken cancellationToken);
         Task<List<ProfileAggregate>> GetAllAsync(int size, int page, CancellationToken cancellationToken);
         Task<Kweet> GetByMessageAsync(string message);
+        Kweet TrackKweet(Kweet kweet);
     }
 }

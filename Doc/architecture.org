@@ -47,20 +47,16 @@ LAYOUT_LEFT_RIGHT()
 Person(user, "User", "People that need to share recipes", "users")
 Container(spa, "Front end", "Vue", "The main interface that the customer interacts with")
 System_Boundary(c1, "Microservices") {
-  Container(gateway, "Gateway", "C#", "Handles all the incoming request and distributes them")
-  Container(authapi, "Auth Service", "C#", "Handles all authorization")
+  Container(gateway, "Gateway", "Kubernetes Ingress", "Handles all the incoming request and distributes them")
+  Container(authapi, "Auth Service", "Keycloak", "Handles all authorization")
   Container(followapi, "Follower Service", "C#", "Handles all follower logic")
-  Container(modapi, "Moderator Service", "C#", "Handles all moderator logic")
   Container(kweetapi, "Kweet Service", "C#", "Handles all kweet logic")
   Container(profileapi, "Profile Service", "C#", "Handles all profile logic")
-  Container(tagapi, "Tag Service", "C#", "Handles all tag logic")
 
   ContainerDb(authdb, " Auth Database", "Postgres", "Holds authorization information")
   ContainerDb(followdb, "Follow Database", "Postgres", "Holds follower information")
-  ContainerDb(moddb, "Moderator Database", "Postgres", "Holds moderator information")
   ContainerDb(kweetdb, "Kweet Database", "Postgres", "Holds kweet information")
   ContainerDb(profiledb, "Profile Database", "Postgres", "Holds profile information")
-  ContainerDb(tagdb, "Tag Database", "Postgres", "Holds tag information")
 
   ContainerQueue(rabbitmq, "Message bus", "RabbitMQ", "Message bus that handles all the messages send between the microservices")
 }
@@ -69,24 +65,17 @@ Rel(spa, gateway, "Uses", "https")
 
 Rel(gateway, authapi, "Uses", "http")
 Rel(gateway, followapi, "Uses", "http")
-Rel(gateway, modapi, "Uses", "http")
 Rel(gateway, kweetapi, "Uses", "http")
 Rel(gateway, profileapi, "Uses", "http")
-Rel(gateway, tagapi, "Uses", "http")
 
 Rel(authapi, authdb, "Reads/Writes")
 Rel(followapi, followdb, "Reads/Writes")
-Rel(modapi, moddb, "Reads/Writes")
 Rel(kweetapi, kweetdb, "Reads/Writes")
 Rel(profileapi, profiledb, "Reads/Writes")
-Rel(tagapi, tagdb, "Reads/Writes")
 
-Rel(authapi, rabbitmq, "Reads/Writes")
 Rel(followapi, rabbitmq, "Reads/Writes")
-Rel(modapi, rabbitmq, "Reads/Writes")
 Rel(kweetapi, rabbitmq, "Reads/Writes")
 Rel(profileapi, rabbitmq, "Reads/Writes")
-Rel(tagapi, rabbitmq, "Reads/Writes")
 Lay_R(authdb, rabbitmq)
 #+end_src
 

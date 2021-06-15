@@ -15,7 +15,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         public Ingredient(string description, string amount)
         {
-            SetId(Id);
+            SetId(Guid.NewGuid());
             SetDescription(Id, description);
             SetAmount(Id, amount);
         }

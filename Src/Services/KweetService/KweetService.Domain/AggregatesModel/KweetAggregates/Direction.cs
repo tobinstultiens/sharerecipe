@@ -1,3 +1,4 @@
+using System;
 using ShareRecipe.Services.Common.Domain;
 
 namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates
@@ -14,6 +15,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         public Direction(int order, string message)
         {
+            SetId(Guid.NewGuid());
             Order = order;
             Message = message;
         }

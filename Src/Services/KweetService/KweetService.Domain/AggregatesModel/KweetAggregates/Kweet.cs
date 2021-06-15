@@ -7,6 +7,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 {
     public class Kweet : Entity
     {
+        public Guid UserId { get; private set; }
         public string Message { get; private set; }
         public List<Ingredient> Ingredients { get; private set; }
         public List<Direction> Directions { get; private set; }
@@ -15,13 +16,14 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
         {
         }
 
-        public Kweet(string message, List<Ingredient> ingredients, List<Direction> directions)
+        public Kweet(string message, Guid userId, List<Ingredient> ingredients, List<Direction> directions)
         {
             SetId(Guid.NewGuid());
-            AddDomainEvent(new KweetCreatedDomainEvent(Id));
+            UserId = userId;
             SetMessage(Id, message);
             SetDirections(Id, directions);
             SetIngredients(Id, ingredients);
+            AddDomainEvent(new KweetCreatedDomainEvent(Id));
         }
 
         private void SetIngredients(Guid guid, List<Ingredient> ingredients)

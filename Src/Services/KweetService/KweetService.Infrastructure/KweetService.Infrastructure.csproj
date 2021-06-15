@@ -16,4 +16,8 @@
       <ProjectReference Include="..\KweetService.Domain\KweetService.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
 </Project>
