@@ -10,6 +10,8 @@ namespace ShareRecipe.Services.KweetService.Infrastructure.Configurations
         {
             builder.Ignore(p => p.DomainEvents);
             builder.HasKey(p => p.Id);
+            builder.Property(p => p.UserId)
+                .IsRequired(true);
             builder.Property(p => p.Message)
                 .IsRequired(true);
             builder.OwnsMany(p => p.Directions, navigationBuilder =>

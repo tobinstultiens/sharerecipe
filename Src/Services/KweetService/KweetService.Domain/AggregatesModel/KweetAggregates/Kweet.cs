@@ -16,10 +16,9 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
         {
         }
 
-        public Kweet(string message, Guid userId, List<Ingredient> ingredients, List<Direction> directions)
+        public Kweet(string message, List<Ingredient> ingredients, List<Direction> directions)
         {
             SetId(Guid.NewGuid());
-            UserId = userId;
             SetMessage(Id, message);
             SetDirections(Id, directions);
             SetIngredients(Id, ingredients);

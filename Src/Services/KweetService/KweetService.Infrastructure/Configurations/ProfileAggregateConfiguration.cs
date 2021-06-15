@@ -20,12 +20,7 @@ namespace ShareRecipe.Services.KweetService.Infrastructure.Configurations
             builder.HasMany(p => p.Kweets)
                 .WithOne()
                 .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-            builder
-                .Navigation(p => p.Kweets)
-                .HasField("kweets")
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
