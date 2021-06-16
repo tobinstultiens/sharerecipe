@@ -21,14 +21,14 @@ namespace ShareRecipe.Services.KweetService.API.Application.Validations
             _kweetRepository = kweetRepository ?? throw new ArgumentNullException(nameof(kweetRepository));
             
             RuleFor(createUserCommand => createUserCommand.UserId)
-                .CustomAsync(CheckUserIdExistsAsync);
+                .Custom(CheckUserIdExistsAsync);
 
             RuleFor(createUserCommand => createUserCommand.Message)
                 .NotEmpty()
                 .WithMessage("The profile picture url is null, empty or contains only white spaces.");
         }
 
-        private async Task CheckUserIdExistsAsync(Guid proposedId, ValidationContext<CreateKweetCommand> context, CancellationToken cancellationToken)
+        private void CheckUserIdExistsAsync(Guid proposedId, ValidationContext<CreateKweetCommand> context)
         {
             // Checks whether the user id is empty.
             if (proposedId == Guid.Empty)

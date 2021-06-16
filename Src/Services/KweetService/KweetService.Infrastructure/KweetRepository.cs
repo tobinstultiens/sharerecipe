@@ -35,7 +35,7 @@ namespace ShareRecipe.Services.KweetService.Infrastructure
                 .ToListAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<Kweet> GetByMessageAsync(string message)
+        public Task<Kweet> GetByMessageAsync(string message)
         {
             // return await _context.Profile.AsQueryable()
             // .Where(user => string.Equals(user.Kweets.Find(kweet => kweet.Message == message).Message, message, StringComparison.CurrentCultureIgnoreCase))
