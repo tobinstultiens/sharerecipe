@@ -1,6 +1,7 @@
 name: Solution code coverage
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
