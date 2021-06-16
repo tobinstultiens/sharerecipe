@@ -53,7 +53,7 @@ jobs:
         with:
           sonarProjectKey: tobinstultiens_sharerecipe
           sonarProjectName: sharerecipe
-          sonarOrganization: tobinstultiens
+          sonarOrganization: tobinstultiensthisisakeyiguessineedtomake
           dotnetBuildArguments: ./Src/ShareRecipe.sln
           dotnetTestArguments: ./Src/ShareRecipe.sln  --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
