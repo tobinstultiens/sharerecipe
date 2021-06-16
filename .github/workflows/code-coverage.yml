@@ -1,55 +1,59 @@
 name: Solution code coverage
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - Src/Services/**
-  pull_request:
-    types: [opened, synchronize, reopened]
-    paths:
-      - Src/Services/**
-
 defaults:
   run:
     working-directory: Src
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
-  # Builds the code
+
+  # Builds the code 
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    # Checks out the code
-    - name: Checkout
-      uses: actions/checkout@v2
+      # Checks out the code
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    # Sets up the .NET SDK
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: '5.0.x'
+      # Sets up the .NET SDK
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: '5.0.x'
 
-    # Installs the dependencies
-    - name: Install dependencies
-      run: dotnet restore
+      # Installs the dependencies
+      - name: Install dependencies
+        run: dotnet restore
 
-    # Builds the code
-    - name: Build
-      run: dotnet build --no-restore
+      # Builds the code
+      - name: Build
+        run: dotnet build --no-restore
 
   # Runs the tests with sonarscan
-  codequality:
-    needs: [build]
-    runs-on: [ubuntu-latest]
+  test:
+    needs: build
+    name: Test
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Test dotnet
-        run: dotnet test
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      # Checks out the code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Tests the code and performs a sonarscan
+      - name: Test
+        uses: highbyte/sonarscan-dotnet@v2.1.1-beta
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          sonarProjectKey: tobinstultiens_sharerecipe
+          sonarProjectName: sharerecipe
+          sonarOrganization: tobinstultiens
+          dotnetBuildArguments: ./Src/ShareRecipe.sln
+          dotnetTestArguments: ./Src/ShareRecipe.sln  --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
