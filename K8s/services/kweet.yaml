@@ -55,3 +55,17 @@ spec:
               cpu: 50m
           ports:
             - containerPort: 80
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sharerecipe-kweet-service-autoscaler
+  namespace: sharerecipe
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sharerecipe-kweet-service
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 75
