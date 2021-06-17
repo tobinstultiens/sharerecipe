@@ -1,6 +1,6 @@
 #!/bin/sh
 #minikube config set driver kvm2
-minikube start --cpus=8 --memory=16384
+minikube start --cpus=8 --memory=16384 --extra-config kubelet.EnableCustomMetrics=true
 #minikube addons enable ingress
 # Create ShareRecipe
 kubectl apply -f sharerecipe-namespace.yaml
