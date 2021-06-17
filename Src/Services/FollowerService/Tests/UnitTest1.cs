@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace ShareRecipe.Services.Common.Tests
+namespace ShareRecipe.Services.FollowerService.Tests
 {
     public class UnitTest1
     {

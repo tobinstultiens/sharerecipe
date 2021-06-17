@@ -1,9 +1,9 @@
 using System;
 using FluentAssertions;
-using ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregates;
+using ShareRecipe.Services.FollowerService.Domain;
 using Xunit;
 
-namespace ShareRecipe.Services.KweetService.Tests
+namespace ShareRecipe.Services.FollowerService.Tests
 {
     public class ProfileServiceDomainTests
     {
@@ -11,9 +11,7 @@ namespace ShareRecipe.Services.KweetService.Tests
         public void UserProfileTestCorrect()
         {
             var userProfileAggregate = new ProfileAggregate(Guid.NewGuid(), "test", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png");
-            userProfileAggregate.CreateKweetAsync("- Sup\nheyhey\n1.hey");
             userProfileAggregate.DisplayName.Should().Be("test");
-            userProfileAggregate.Kweets.Should().Contain(k => k.Message == "- Sup\nheyhey\n1.hey");
             userProfileAggregate.ProfilePictureUrl.Should().Be("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png");
         }
 

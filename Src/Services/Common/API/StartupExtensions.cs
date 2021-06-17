@@ -1,4 +1,7 @@
+using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,14 +45,39 @@ namespace ShareRecipe.Services.Common.API
                     options.Authority = configuration["Authentication:KeycloakAuthentication:ServerAddress"] + "/auth/realms/" + configuration["Authentication:KeycloakAuthentication:Realm"];
                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        ValidAudiences = new string[] { "curl", "vueapp", "accountingApplication", "swagger"}
+                        ValidAudiences = new string[] { "curl", "vueapp", "accountingApplication", "swagger"},
                     };
                     options.RequireHttpsMetadata = false; //for test only!
                     options.SaveToken = true;
                     options.Validate();
-
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = context =>
+                        {
+                            MapKeycloakRolesToRoleClaims(context);
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
+            
             return serviceCollection;
+        }
+        
+        private static void MapKeycloakRolesToRoleClaims(TokenValidatedContext context)
+        {
+            //var resourceAccess = JObject.Parse(context.Principal.FindFirst("resource_access").Value);
+            //var clientResource = resourceAccess[context.Principal.FindFirstValue("aud")];
+            var clientRoles = context.Principal.Claims.Where(w=>w.Type== "realm_access_roles").ToList();
+            var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
+            if (claimsIdentity == null)
+            {
+                return;
+            }
+
+            foreach (var clientRole in clientRoles)
+            {
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, clientRole.Value));
+            }
         }
     }
 }

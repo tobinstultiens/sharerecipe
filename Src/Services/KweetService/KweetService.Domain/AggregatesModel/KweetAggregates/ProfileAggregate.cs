@@ -19,6 +19,7 @@ namespace ShareRecipe.Services.KweetService.Domain.AggregatesModel.KweetAggregat
 
         public ProfileAggregate(Guid userid, string displayName, string profilePictureUrl)
         {
+            Kweets = new List<Kweet>();
             SetId(userid);
             SetDisplayName(displayName);
             SetProfilePictureUrl(profilePictureUrl);

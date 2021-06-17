@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\FollowerService\Domain\FollowerService.Domain.csproj" />
+      <ProjectReference Include="..\KweetService.Domain\KweetService.Domain.csproj" />
     </ItemGroup>
 
 </Project>
